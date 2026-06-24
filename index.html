@@ -11,206 +11,557 @@
       --navy:#0D1B2A; --navy2:#162232; --blue:#2563EB; --blueDark:#1A56DB; --teal:#0694A2;
       --green:#057A55; --green2:#10B981; --amber:#B45309; --amber2:#F59E0B; --red:#C81E1E; --red2:#F05252;
       --purple:#6C2BD9; --bg:#F1F5F9; --card:#FFFFFF; --border:#E2E8F0; --soft:#F8FAFC;
-      --text:#1E293B; --muted:#64748B; --sidebar-w:210px; --radius:14px;
+      --text:#1E293B; --muted:#64748B; --sidebar-w:210px; --radius:10px; --radius-lg:14px;
       --shadow:0 4px 18px rgba(15,23,42,.07); --shadow-lg:0 12px 34px rgba(15,23,42,.14);
+      --border-nav:rgba(255,255,255,.08); --text-nav-secondary:rgba(255,255,255,.68);
+      --font-base:16px; --lh-base:1.5; --lh-tight:1.35; --lh-relaxed:1.6;
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:linear-gradient(135deg,#F8FAFC,#EEF5FB);color:var(--text);font-size:13px;min-height:100vh;overflow-x:hidden}
+    body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:linear-gradient(135deg,#F8FAFC,#EEF5FB);color:var(--text);font-size:var(--font-base);line-height:var(--lh-base);min-height:100vh;overflow-x:hidden}
+    
+    /* ===== SIDEBAR ===== */
     .sidebar{width:var(--sidebar-w);background:linear-gradient(180deg,var(--navy),var(--navy2));position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column;box-shadow:8px 0 22px rgba(15,23,42,.16);transition:.22s ease}
-    .brand{padding:16px 14px 12px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;gap:10px;align-items:center}
-    .brand-icon{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;display:grid;place-items:center;font-weight:950;box-shadow:0 10px 22px rgba(6,148,162,.25)}
+    .brand{padding:16px 14px 12px;border-bottom:1px solid var(--border-nav);display:flex;gap:10px;align-items:center}
+    .brand-icon{width:36px;height:36px;border-radius:var(--radius);background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff;display:grid;place-items:center;font-weight:950;box-shadow:var(--shadow-lg)}
     .brand-title{color:white;font-size:13px;font-weight:950;letter-spacing:.3px}.brand-sub{color:rgba(255,255,255,.50);font-size:9.5px;margin-top:2px}
-    .nav{padding:10px 8px;overflow:auto;flex:1}.nav-label{font-size:9px;font-weight:900;color:rgba(255,255,255,.34);text-transform:uppercase;letter-spacing:.8px;padding:8px 8px 5px}
-    .nav-item{width:100%;border:0;background:transparent;color:rgba(255,255,255,.68);display:flex;align-items:center;gap:8px;text-align:left;padding:9px 10px;border-radius:11px;cursor:pointer;font-size:12px;font-weight:750;margin-bottom:3px;transition:.18s ease}.nav-item:hover{background:rgba(255,255,255,.08);color:#fff}.nav-item.active{background:linear-gradient(135deg,var(--blueDark),var(--blue));color:#fff;box-shadow:0 8px 18px rgba(37,99,235,.28)}
-    .sidebar-foot{border-top:1px solid rgba(255,255,255,.08);padding:10px;color:rgba(255,255,255,.55);font-size:10.5px;line-height:1.4}
-    .topbar{position:fixed;top:0;left:var(--sidebar-w);right:0;height:56px;z-index:90;background:rgba(248,250,252,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 18px;transition:.22s ease}.menu-btn{display:none;border:1px solid var(--border);background:#fff;border-radius:10px;padding:8px 10px;font-weight:900;color:var(--navy);box-shadow:var(--shadow)}.top-title{font-weight:950;font-size:14px}.top-sub{font-size:10.5px;color:var(--muted);margin-top:1px}.spacer{flex:1}.status{font-size:10.8px;font-weight:850;color:var(--blueDark);background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:6px 9px}.time{font-size:10.5px;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px 9px;box-shadow:var(--shadow)}
-    .main{margin-left:var(--sidebar-w);padding:72px 18px 28px;transition:.22s ease}.overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:95}.overlay.show{display:block}
-    .toolbar,.card,.kpi,.chart-card,.table-card,.hero{background:rgba(255,255,255,.96);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .toolbar{padding:12px;display:flex;flex-wrap:wrap;gap:9px;align-items:end;margin-bottom:12px}.field{display:flex;flex-direction:column;gap:4px;min-width:150px;flex:1;max-width:230px}.field label{font-size:9.5px;text-transform:uppercase;color:var(--muted);font-weight:950;letter-spacing:.4px}.field input,.field select{border:1px solid var(--border);border-radius:10px;padding:8px 9px;background:#F8FAFC;color:var(--text);outline:none;font-size:12px}.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.10);background:#fff}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:10px;padding:8px 11px;font-weight:900;font-size:11.5px;cursor:pointer;transition:.16s ease;white-space:nowrap}.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-lg)}.btn-primary{background:var(--blue);color:#fff}.btn-ghost{background:#fff;color:var(--text);border:1px solid var(--border)}.btn-green{background:var(--green);color:#fff}.btn-amber{background:var(--amber2);color:#fff}.btn-red{background:var(--red2);color:#fff}.btn-teal{background:var(--teal);color:#fff}
-    .section{display:none}.section.active{display:block}.section-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:14px 0 9px}.section-hdr h2{font-size:15px;font-weight:950}.section-hdr p{font-size:11px;color:var(--muted);line-height:1.35}.hero{padding:14px 16px;border-left:4px solid var(--blue);margin-bottom:12px}.hero h1{font-size:18px;color:var(--navy);margin-bottom:5px}.hero p{font-size:12px;color:#334155;line-height:1.45}.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.pill{font-size:10px;font-weight:900;border-radius:999px;padding:5px 8px;background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}.pill.red{background:#FEE2E2;color:#991B1B;border-color:#FECACA}.pill.green{background:#D1FAE5;color:#065F46;border-color:#A7F3D0}.pill.amber{background:#FEF3C7;color:#92400E;border-color:#FDE68A}
-    .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}.kpi{padding:13px;position:relative;overflow:hidden}.kpi:before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal))}.kpi.red:before{background:linear-gradient(90deg,var(--red),var(--red2))}.kpi.amber:before{background:linear-gradient(90deg,var(--amber),var(--amber2))}.kpi.green:before{background:linear-gradient(90deg,var(--green),var(--green2))}.kpi span{display:block;font-size:9px;text-transform:uppercase;color:var(--muted);font-weight:950;letter-spacing:.4px}.kpi b{display:block;font-size:23px;line-height:1;margin-top:6px;color:var(--navy)}.kpi small{display:block;font-size:10px;color:var(--muted);line-height:1.3;margin-top:6px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{padding:14px}.card h3{font-size:13px;font-weight:950;margin-bottom:7px;color:var(--navy)}.card p,.card li{font-size:11.5px;line-height:1.45;color:#334155}.card ul{padding-left:18px;margin-top:6px}.chart-card{padding:13px}.chart-card h3{font-size:12.5px;margin-bottom:3px}.chart-card p{font-size:10.5px;color:var(--muted);margin-bottom:8px}.chart-box{height:280px;position:relative}.chart-box.sm{height:220px}
-    .table-card{overflow:hidden;margin-top:12px}.table-head{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid var(--border)}.table-head h3{font-size:12.5px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:900px}th{background:#F8FAFC;color:var(--muted);font-size:9.3px;font-weight:950;text-transform:uppercase;letter-spacing:.35px;text-align:left;padding:8px;border-bottom:1px solid var(--border);white-space:nowrap}td{font-size:11.2px;color:var(--text);padding:8px;border-bottom:1px solid var(--border);vertical-align:top}tr:hover td{background:#F8FAFC}.num{text-align:right;font-variant-numeric:tabular-nums}.badge{display:inline-flex;border-radius:8px;padding:3px 7px;font-size:9.5px;font-weight:900;white-space:nowrap}.badge.blue{background:#DBEAFE;color:#1D4ED8}.badge.green{background:#D1FAE5;color:#065F46}.badge.amber{background:#FEF3C7;color:#92400E}.badge.red{background:#FEE2E2;color:#991B1B}.badge.gray{background:#F1F5F9;color:#64748B}.muted{color:var(--muted)}
-    .report-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.report-note{font-size:10.5px;color:var(--muted);line-height:1.35;margin-top:7px}
-    .text-box{width:100%;min-height:110px;border:1px solid var(--border);border-radius:12px;padding:10px;background:#F8FAFC;font-family:inherit;font-size:12px;line-height:1.45;color:#334155;resize:vertical}.empty{padding:38px;text-align:center;color:var(--muted)}.toast{position:fixed;right:16px;bottom:16px;z-index:400;background:var(--navy);color:#fff;border-radius:14px;padding:11px 15px;font-weight:850;font-size:12px;box-shadow:var(--shadow-lg);transform:translateY(80px);transition:.22s}.toast.show{transform:translateY(0)}
-    @media(max-width:920px){.grid-2,.grid-3{grid-template-columns:1fr}.chart-box{height:250px}.top-sub{display:none}.time{display:none}}
-    @media(max-width:760px){:root{--sidebar-w:210px}.sidebar{transform:translateX(-105%)}body.menu-open .sidebar{transform:translateX(0)}.topbar{left:0;height:56px;padding:0 10px}.menu-btn{display:inline-flex}.main{margin-left:0;padding:68px 10px 24px}.toolbar{display:flex;flex-direction:column;align-items:stretch}.field{max-width:none;width:100%;min-width:0}.btn{width:100%;padding:10px 11px}.kpi-grid{grid-template-columns:1fr 1fr}.chart-box,.chart-box.sm{height:230px}table{min-width:760px}.status{font-size:9.8px;padding:5px 7px}.top-title{font-size:12.8px}.hero h1{font-size:16px}}
-    @media(max-width:420px){.kpi-grid{grid-template-columns:1fr}.status{display:none}}
+    
+    .nav{padding:10px 8px;overflow:auto;flex:1}
+    .nav-label{font-size:9px;font-weight:900;color:rgba(255,255,255,.34);text-transform:uppercase;letter-spacing:.8px;padding:8px 8px 5px}
+    .nav-item{width:100%;border:0;background:transparent;color:var(--text-nav-secondary);display:flex;align-items:center;gap:8px;text-align:left;padding:9px 10px;border-radius:var(--radius);cursor:pointer;font-size:12px;font-weight:750;margin-bottom:3px;transition:.18s ease}
+    .nav-item:hover{background:rgba(255,255,255,.08);color:#fff}
+    .nav-item.active{background:linear-gradient(135deg,var(--blueDark),var(--blue));color:#fff;box-shadow:0 8px 18px rgba(37,99,235,.28)}
+    
+    .sidebar-foot{border-top:1px solid var(--border-nav);padding:10px;color:rgba(255,255,255,.55);font-size:10.5px;line-height:var(--lh-tight)}
+    
+    /* ===== TOPBAR ===== */
+    .topbar{position:fixed;top:0;left:var(--sidebar-w);right:0;height:56px;z-index:90;background:rgba(248,250,252,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;padding:0 18px;transition:.22s ease}
+    .menu-btn{display:none;border:1px solid var(--border);background:#fff;border-radius:var(--radius);padding:8px 10px;font-weight:900;color:var(--navy);box-shadow:var(--shadow);z-index:101;cursor:pointer}
+    .top-title{font-weight:950;font-size:14px}.top-sub{font-size:10.5px;color:var(--muted);margin-top:1px}
+    .spacer{flex:1}.status{font-size:10.8px;font-weight:850;color:var(--blueDark);background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--radius);padding:6px 9px}
+    .time{font-size:10.5px;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:6px 9px;box-shadow:var(--shadow)}
+    
+    .main{margin-left:var(--sidebar-w);padding:72px 18px 28px;transition:.22s ease}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:95;cursor:pointer}
+    .overlay.show{display:block}
+    
+    /* ===== CARDS & GRIDS ===== */
+    .toolbar,.card,.kpi,.chart-card,.table-card,.hero{background:rgba(255,255,255,.96);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
+    
+    .toolbar{padding:12px;display:flex;flex-wrap:wrap;gap:9px;align-items:end;margin-bottom:12px}
+    .field{display:flex;flex-direction:column;gap:4px;min-width:150px;flex:1;max-width:230px}
+    .field label{font-size:9.5px;text-transform:uppercase;color:var(--muted);font-weight:950;letter-spacing:.4px}
+    .field input, .field select{border:1px solid var(--border);border-radius:var(--radius);padding:8px 9px;background:#F8FAFC;color:var(--text);outline:none;font-size:12px;font-family:inherit}
+    .field input:focus, .field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.10);background:#fff}
+    
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:var(--radius);padding:8px 11px;font-weight:900;font-size:11.5px;cursor:pointer;transition:.16s ease;white-space:nowrap}
+    .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-ghost{background:#fff;color:var(--text);border:1px solid var(--border)}
+    .btn-green{background:var(--green);color:#fff}
+    .btn-amber{background:var(--amber2);color:#fff}
+    .btn-red{background:var(--red2);color:#fff}
+    .btn-teal{background:var(--teal);color:#fff}
+    
+    /* ===== SECTIONS & CONTENT ===== */
+    .section{display:none}.section.active{display:block}
+    .section-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:14px 0 9px}
+    .section-hdr h2{font-size:18px;font-weight:950}
+    .section-hdr p{font-size:11px;color:var(--muted);line-height:var(--lh-tight)}
+    
+    .hero{padding:14px 16px;border-left:4px solid var(--blue);margin-bottom:12px}
+    .hero h1{font-size:18px;color:var(--navy);margin-bottom:5px}
+    .hero p{font-size:13px;color:#334155;line-height:var(--lh-relaxed)}
+    
+    .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+    .pill{font-size:10px;font-weight:900;border-radius:999px;padding:5px 8px;background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+    .pill.red{background:#FEE2E2;color:#991B1B;border-color:#FECACA}
+    .pill.green{background:#D1FAE5;color:#065F46;border-color:#A7F3D0}
+    .pill.amber{background:#FEF3C7;color:#92400E;border-color:#FDE68A}
+    
+    /* ===== KPI ===== */
+    .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+    .kpi{padding:13px;position:relative;overflow:hidden}
+    .kpi:before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal))}
+    .kpi.red:before{background:linear-gradient(90deg,var(--red),var(--red2))}
+    .kpi.amber:before{background:linear-gradient(90deg,var(--amber),var(--amber2))}
+    .kpi.green:before{background:linear-gradient(90deg,var(--green),var(--green2))}
+    .kpi span{display:block;font-size:9px;text-transform:uppercase;color:var(--muted);font-weight:950;letter-spacing:.4px}
+    .kpi b{display:block;font-size:23px;line-height:1;margin-top:6px;color:var(--navy)}
+    .kpi small{display:block;font-size:10px;color:var(--muted);line-height:var(--lh-tight);margin-top:6px}
+    
+    /* ===== GRIDS ===== */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    
+    .card{padding:14px}
+    .card h3{font-size:14px;font-weight:950;margin-bottom:7px;color:var(--navy)}
+    .card p, .card li{font-size:13px;line-height:var(--lh-relaxed);color:#334155}
+    .card ul{padding-left:18px;margin-top:6px}
+    
+    .chart-card{padding:13px}
+    .chart-card h3{font-size:13px;margin-bottom:3px;font-weight:950}
+    .chart-card p{font-size:10.5px;color:var(--muted);margin-bottom:8px}
+    .chart-box{height:280px;position:relative}
+    .chart-box.sm{height:220px}
+    
+    /* ===== TABLE ===== */
+    .table-card{overflow:hidden;margin-top:12px}
+    .table-head{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid var(--border)}
+    .table-head h3{font-size:13px;font-weight:950}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:900px}
+    th{background:#F8FAFC;color:var(--muted);font-size:9.3px;font-weight:950;text-transform:uppercase;letter-spacing:.35px;text-align:left;padding:8px;border-bottom:1px solid var(--border);white-space:nowrap}
+    td{font-size:12px;color:var(--text);padding:8px;border-bottom:1px solid var(--border);vertical-align:top}
+    tr:hover td{background:#F8FAFC}
+    .num{text-align:right;font-variant-numeric:tabular-nums}
+    
+    .badge{display:inline-flex;border-radius:8px;padding:3px 7px;font-size:9.5px;font-weight:900;white-space:nowrap}
+    .badge.blue{background:#DBEAFE;color:#1D4ED8}
+    .badge.green{background:#D1FAE5;color:#065F46}
+    .badge.amber{background:#FEF3C7;color:#92400E}
+    .badge.red{background:#FEE2E2;color:#991B1B}
+    .badge.gray{background:#F1F5F9;color:#64748B}
+    
+    .muted{color:var(--muted)}
+    
+    /* ===== UTILITIES ===== */
+    .report-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .report-note{font-size:10.5px;color:var(--muted);line-height:var(--lh-tight);margin-top:7px}
+    .text-box{width:100%;min-height:110px;border:1px solid var(--border);border-radius:var(--radius);padding:10px;background:#F8FAFC;font-family:inherit;font-size:13px;line-height:var(--lh-relaxed);color:#334155;resize:vertical}
+    .empty{padding:38px;text-align:center;color:var(--muted)}
+    
+    .toast{position:fixed;right:16px;bottom:16px;z-index:400;background:var(--navy);color:#fff;border-radius:var(--radius-lg);padding:11px 15px;font-weight:850;font-size:12px;box-shadow:var(--shadow-lg);transform:translateY(80px);transition:.22s;line-height:1.4}
+    .toast.show{transform:translateY(0)}
+    
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:920px){
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      .chart-box{height:250px}
+      .top-sub{display:none}
+      .time{display:none}
+    }
+    
+    @media(max-width:760px){
+      :root{--sidebar-w:0px}
+      
+      .sidebar{transform:translateX(-105%)}
+      body.menu-open .sidebar{transform:translateX(0)}
+      
+      .topbar{left:0;padding:0 12px}
+      .menu-btn{display:inline-flex}
+      
+      .main{margin-left:0;padding:62px 12px 24px}
+      
+      .toolbar{flex-direction:column;align-items:stretch;gap:10px}
+      .field{max-width:none;width:100%;min-width:0}
+      .btn{width:100%;padding:10px 11px;font-size:12px}
+      
+      .section-hdr{flex-direction:column;gap:6px}
+      .section-hdr h2{font-size:16px}
+      .section-hdr p{font-size:11px}
+      
+      .hero h1{font-size:16px}
+      .hero p{font-size:12px}
+      
+      .kpi-grid{grid-template-columns:1fr 1fr}
+      .chart-box, .chart-box.sm{height:220px}
+      
+      .grid-2,.grid-3{gap:10px}
+      .card{padding:12px}
+      .card h3{font-size:13px}
+      .card p, .card li{font-size:12px}
+      
+      .chart-card{padding:11px}
+      .chart-card h3{font-size:12px}
+      .chart-card p{font-size:10px}
+      
+      .table-wrap{overflow-x:auto}
+      table{min-width:700px;font-size:11px}
+      th{font-size:9px;padding:7px}
+      td{font-size:11px;padding:7px}
+      
+      .top-title{font-size:13px}
+      .status{font-size:9.5px;padding:5px 7px}
+      
+      .report-note, .sidebar-foot{font-size:10px}
+      
+      body.menu-open .overlay{display:block}
+    }
+    
+    @media(max-width:420px){
+      .kpi-grid{grid-template-columns:1fr}
+      .status{display:none}
+      .section-hdr h2{font-size:15px}
+      .card h3{font-size:12px}
+      .chart-box, .chart-box.sm{height:200px}
+    }
+    
+    /* Reducir movimiento para usuarios que lo prefieren */
+    @media(prefers-reduced-motion:reduce){
+      * {animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
+    }
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="brand"><div class="brand-icon">DM</div><div><div class="brand-title">DMTH</div><div class="brand-sub">Supervisión operativa</div></div></div>
-    <nav class="nav">
-      <div class="nav-label">Módulos</div>
-      <button class="nav-item active" data-tab="pendientes" onclick="switchTab('pendientes')">📌 Pendientes DO / DP</button>
-      <button class="nav-item" data-tab="odt-obras" onclick="switchTab('odt-obras')">🏗️ ODT Obras semanal</button>
-      <button class="nav-item" data-tab="odt-produccion" onclick="switchTab('odt-produccion')">🏭 ODT Producción semanal</button>
-      <button class="nav-item" data-tab="personal" onclick="switchTab('personal')">👥 Personal · salidas</button>
-      <button class="nav-item" data-tab="informe" onclick="switchTab('informe')">📑 Informe integral</button>
-      <div class="nav-label">Acciones</div>
-      <button class="nav-item" onclick="refreshAll()">🔄 Refrescar datos</button>
-      <button class="nav-item" onclick="exportCurrentCSV()">⬇️ Exportar CSV</button>
-      <button class="nav-item" onclick="exportCurrentPDF()">📄 PDF del módulo</button>
-      <button class="nav-item" onclick="exportInformeIntegralPDF()">📘 PDF integral</button>
-    </nav>
-    <div class="sidebar-foot">Diseño y desarrollo: DI Emiliano Villagra Abadie. Datos leídos desde CSV/Google Sheets.</div>
-  </aside>
-  <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+  <aside id="overlay" class="overlay"></aside>
+  
+  <nav class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">D</div>
+      <div>
+        <div class="brand-title">DMTH</div>
+        <div class="brand-sub">Supervisión</div>
+      </div>
+    </div>
+    <div class="nav">
+      <label class="nav-label">Menú Principal</label>
+      <button class="nav-item active" onclick="switchSection('inicio')">📊 Inicio</button>
+      <button class="nav-item" onclick="switchSection('pendientes')">⏳ Pendientes</button>
+      <button class="nav-item" onclick="switchSection('odt-obras')">🏗️ ODT Obras</button>
+      <button class="nav-item" onclick="switchSection('odt-produccion')">⚙️ ODT Producción</button>
+      <button class="nav-item" onclick="switchSection('personal')">👥 Salidas Personal</button>
+    </div>
+    <div class="sidebar-foot">
+      <strong>v2.0.1</strong><br>Supervisión Operativa DMTH<br>Sistema Real-Time
+    </div>
+  </nav>
+  
   <header class="topbar">
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    <div><div class="top-title" id="top-title">Pendientes DO / DP</div><div class="top-sub" id="top-sub">CONSOLIDADO · pendientes mes a mes</div></div>
-    <div class="spacer"></div><div class="status" id="load-status">Cargando...</div><div class="time" id="clock">—</div>
+    <button class="menu-btn" onclick="toggleMenu()">☰ MENÚ</button>
+    <div>
+      <div class="top-title" id="top-title">DMTH</div>
+      <div class="top-sub" id="top-sub">Supervisión Operativa</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="status" id="load-status">Cargando...</div>
+    <div class="time" id="clock">—</div>
   </header>
+  
   <main class="main">
-    <section class="section active" id="sec-pendientes"></section>
-    <section class="section" id="sec-odt-obras"></section>
-    <section class="section" id="sec-odt-produccion"></section>
-    <section class="section" id="sec-personal"></section>
-    <section class="section" id="sec-informe"></section>
+    <!-- INICIO -->
+    <section id="inicio" class="section active">
+      <div class="hero">
+        <h1>Supervisión Operativa</h1>
+        <p>Sistema integral de monitoreo de demanda, respuesta y ejecución de servicios.</p>
+      </div>
+      
+      <div class="section-hdr">
+        <h2>Indicadores Clave</h2>
+        <p>Actualizado a las <span id="clock-hero">—</span></p>
+      </div>
+      
+      <div class="kpi-grid">
+        <div class="kpi">
+          <span>Órdenes Pendientes</span>
+          <b id="kpi-pending">0</b>
+          <small>Esta semana</small>
+        </div>
+        <div class="kpi green">
+          <span>Completadas</span>
+          <b id="kpi-completed">0</b>
+          <small>Últimos 30 días</small>
+        </div>
+        <div class="kpi amber">
+          <span>En Progreso</span>
+          <b id="kpi-progress">0</b>
+          <small>Activas hoy</small>
+        </div>
+        <div class="kpi red">
+          <span>Vencidas</span>
+          <b id="kpi-overdue">0</b>
+          <small>Requieren atención</small>
+        </div>
+      </div>
+      
+      <div class="section-hdr" style="margin-top:24px">
+        <h2>Evolución Semanal</h2>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Órdenes por día</h3>
+        <p>Cantidad diaria de nuevas órdenes registradas</p>
+        <div class="chart-box">
+          <canvas id="chartEvolution"></canvas>
+        </div>
+      </div>
+      
+      <div class="section-hdr" style="margin-top:24px">
+        <h2>Estado General</h2>
+      </div>
+      
+      <div class="grid-2">
+        <div class="card">
+          <h3>Demanda Registrada</h3>
+          <p>Total de solicitudes ingresadas al sistema en el período seleccionado. Incluye todas las categorías de servicio.</p>
+          <div class="pill-row">
+            <span class="pill">ODT Obras</span>
+            <span class="pill green">Producción</span>
+            <span class="pill amber">Personal</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Estado de Respuesta</h3>
+          <p>Medida de capacidad operativa y respuesta a demanda. Analiza la proporción entre solicitudes resueltas y pendientes.</p>
+          <div class="pill-row">
+            <span class="pill blue">Completada</span>
+            <span class="pill">En Proceso</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- PENDIENTES -->
+    <section id="pendientes" class="section">
+      <div class="section-hdr">
+        <h2>Órdenes Pendientes</h2>
+        <p>Detalle de solicitudes sin cerrar</p>
+      </div>
+      
+      <div class="toolbar">
+        <div class="field" style="flex:0 1 200px">
+          <label>Departamento</label>
+          <select id="filterDept" onchange="applyFilters()"><option value="">—Todos—</option></select>
+        </div>
+        <div class="field" style="flex:0 1 200px">
+          <label>Estado</label>
+          <select id="filterState" onchange="applyFilters()"><option value="">—Todos—</option><option value="Abierta">Abierta</option><option value="Parcial">Parcial</option></select>
+        </div>
+        <button class="btn btn-primary" onclick="exportPendientesCSV()">📥 CSV</button>
+        <button class="btn btn-ghost" onclick="switchSection('inicio')">← Atrás</button>
+      </div>
+      
+      <div class="table-card">
+        <div class="table-head">
+          <h3>Listado</h3>
+        </div>
+        <div class="table-wrap">
+          <table id="tablePendientes">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>ID</th>
+                <th>Departamento</th>
+                <th>Rubro</th>
+                <th>Efector</th>
+                <th>Detalle</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="empty" id="emptyPendientes" style="display:none">Sin registros</div>
+    </section>
+    
+    <!-- ODT OBRAS -->
+    <section id="odt-obras" class="section">
+      <div class="section-hdr">
+        <h2>Órdenes de Trabajo · Obras</h2>
+        <p>Seguimiento de proyectos y trabajos de infraestructura</p>
+      </div>
+      
+      <div class="toolbar">
+        <div class="field" style="flex:0 1 200px">
+          <label>Semana</label>
+          <select id="filterWeekObras" onchange="applyFilters()"></select>
+        </div>
+        <button class="btn btn-primary" onclick="exportOdtCSV('obras')">📥 CSV</button>
+        <button class="btn btn-ghost" onclick="switchSection('inicio')">← Atrás</button>
+      </div>
+      
+      <div class="chart-card" style="margin-bottom:12px">
+        <h3>Distribución por estado</h3>
+        <p>Proporción de órdenes según su estado de avance</p>
+        <div class="chart-box sm">
+          <canvas id="chartOdtObrasPie"></canvas>
+        </div>
+      </div>
+      
+      <div class="table-card">
+        <div class="table-head">
+          <h3>ODT Registradas</h3>
+        </div>
+        <div class="table-wrap">
+          <table id="tableOdtObras">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Día</th>
+                <th>ID</th>
+                <th>Rubro</th>
+                <th>Destino</th>
+                <th>Tarea</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="empty" id="emptyOdtObras" style="display:none">Sin registros</div>
+    </section>
+    
+    <!-- ODT PRODUCCIÓN -->
+    <section id="odt-produccion" class="section">
+      <div class="section-hdr">
+        <h2>Órdenes de Trabajo · Producción</h2>
+        <p>Tareas de manufactura y producción hospitalaria</p>
+      </div>
+      
+      <div class="toolbar">
+        <div class="field" style="flex:0 1 200px">
+          <label>Semana</label>
+          <select id="filterWeekProduccion" onchange="applyFilters()"></select>
+        </div>
+        <button class="btn btn-primary" onclick="exportOdtCSV('produccion')">📥 CSV</button>
+        <button class="btn btn-ghost" onclick="switchSection('inicio')">← Atrás</button>
+      </div>
+      
+      <div class="chart-card" style="margin-bottom:12px">
+        <h3>Distribución por estado</h3>
+        <p>Proporción de órdenes según su estado de avance</p>
+        <div class="chart-box sm">
+          <canvas id="chartOdtProduccionPie"></canvas>
+        </div>
+      </div>
+      
+      <div class="table-card">
+        <div class="table-head">
+          <h3>ODT Registradas</h3>
+        </div>
+        <div class="table-wrap">
+          <table id="tableOdtProduccion">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Día</th>
+                <th>ID</th>
+                <th>Rubro</th>
+                <th>Destino</th>
+                <th>Tarea</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="empty" id="emptyOdtProduccion" style="display:none">Sin registros</div>
+    </section>
+    
+    <!-- PERSONAL -->
+    <section id="personal" class="section">
+      <div class="section-hdr">
+        <h2>Salidas de Personal</h2>
+        <p>Autorización y seguimiento de personal en terreno</p>
+      </div>
+      
+      <div class="toolbar">
+        <div class="field" style="flex:0 1 200px">
+          <label>Semana</label>
+          <select id="filterWeekPersonal" onchange="applyFilters()"></select>
+        </div>
+        <button class="btn btn-primary" onclick="exportPersonalCSV()">📥 CSV</button>
+        <button class="btn btn-ghost" onclick="switchSection('inicio')">← Atrás</button>
+      </div>
+      
+      <div class="chart-card" style="margin-bottom:12px">
+        <h3>Distribución por sector</h3>
+        <p>Personal autorizado según área de destino</p>
+        <div class="chart-box sm">
+          <canvas id="chartPersonalBar"></canvas>
+        </div>
+      </div>
+      
+      <div class="table-card">
+        <div class="table-head">
+          <h3>Autorizaciones</h3>
+        </div>
+        <div class="table-wrap">
+          <table id="tablePersonal">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>ID</th>
+                <th>Agente</th>
+                <th>DNI</th>
+                <th>Sector</th>
+                <th>Motivo</th>
+                <th>Destino</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Obs</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="empty" id="emptyPersonal" style="display:none">Sin registros</div>
+    </section>
   </main>
-  <div class="toast" id="toast">Listo</div>
-
-<script>
-const CONFIG={
-  consolidado:{label:'CONSOLIDADO',url:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTjKIJnzV8oxK7uDAxU9Jx4WJj8V6yLZhhJd6hiu7XHzhZoHInkgpJKpwknj5IXxNXH17is_mt0hpHj/pub?gid=2122917362&single=true&output=csv'},
-  odtObras:{label:'ODT OBRAS',url:'https://docs.google.com/spreadsheets/d/1n8QE2CURJ61OudPpbJk_xYq7VT6dDbHof9EgvgjD0e8/gviz/tq?tqx=out:csv&gid=646917453'},
-  odtProduccion:{label:'ODT PRODUCCIÓN',url:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTDXSk7VpcFqTKJ9njjjSaxXwOhIV3_osFEr6cEU2qq6YVMpkZi3XidtubsWNx1Y7zDl_a9rOMOG2_V/pub?gid=805220081&single=true&output=csv'},
-  personal:{label:'PERSONAL · SALIDAS',url:'https://docs.google.com/spreadsheets/d/1tWysm48CmM_-ZPZsmbuCjOjKSAo-KS2sAV6PFQ6gLwI/gviz/tq?tqx=out:csv&gid=566215444'}
-};
-const S={active:'pendientes',raw:{consolidado:[],odtObras:[],odtProduccion:[],personal:[]},charts:{},filters:{pendDept:'',pendMonth:'',pendSearch:'',week:currentWeekStr(),rubroObras:'',rubroProd:'',personalWeek:currentWeekStr(),personalSearch:''},lastRefresh:null};
-const META={
-  pendientes:{title:'Pendientes DO / DP',sub:'CONSOLIDADO · IDs no finalizados, sin No califica ni Mal cargado'},
-  'odt-obras':{title:'ODT Obras semanal',sub:'Órdenes emitidas por día de la semana, separadas por rubro'},
-  'odt-produccion':{title:'ODT Producción semanal',sub:'Órdenes emitidas por día de la semana, separadas por rubro'},
-  personal:{title:'Personal · salidas',sub:'Comisiones de servicio y salidas por día/agente'},
-  informe:{title:'Informe integral',sub:'Análisis ejecutivo consolidado · pendientes, ODT y personal'}
-};
-const DAYS=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
-const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const DERIVAR_MAP={'DO':'Dpto. Obras','DP':'Dpto. Producción','DPTO. OBRAS':'Dpto. Obras','DPTO OBRAS':'Dpto. Obras','DEPARTAMENTO OBRAS':'Dpto. Obras','DEPARTAMENTO DE OBRAS':'Dpto. Obras','DPTO. PRODUCCION':'Dpto. Producción','DPTO PRODUCCION':'Dpto. Producción','DEPARTAMENTO PRODUCCION':'Dpto. Producción','DEPARTAMENTO DE PRODUCCION':'Dpto. Producción'};
-
-window.addEventListener('DOMContentLoaded',()=>{tick();setInterval(tick,1000);refreshAll();});
-async function refreshAll(){setStatus('Cargando datos...');try{await Promise.all(Object.keys(CONFIG).map(loadSource));S.lastRefresh=new Date();setStatus('Datos actualizados ✓');renderAll();}catch(e){console.error(e);setStatus('Error al cargar datos');toast('Error al cargar alguna fuente');renderAll();}}
-async function loadSource(key){try{const res=await fetch(CONFIG[key].url+'&_='+Date.now(),{cache:'no-store'});if(!res.ok)throw new Error('HTTP '+res.status);const text=await res.text();if(text.trim().startsWith('<!'))throw new Error('No publicado como CSV');const objects=csvToObjects(text);S.raw[key]=objects.map((r,i)=>normalize(key,r,i));console.log(CONFIG[key].label, S.raw[key].length);}catch(e){console.warn('No se pudo leer '+CONFIG[key].label,e);S.raw[key]=[];}}
-function csvToObjects(text){const rows=parseCSV(text);if(rows.length<2)return[];const headers=rows[0].map(h=>String(h||'').trim().replace(/^\uFEFF/,'').replace(/\s+/g,' '));return rows.slice(1).filter(r=>r.some(c=>String(c||'').trim())).map(row=>{const o={__cells:row};headers.forEach((h,i)=>o[h||('COL_'+(i+1))]=row[i]||'');return o;});}
-function parseCSV(text){const rows=[];let row=[],cell='',q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&q&&n==='"'){cell+='"';i++;}else if(c==='"'){q=!q;}else if(c===','&&!q){row.push(cell);cell='';}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&n==='\n')i++;row.push(cell);rows.push(row);row=[];cell='';}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows;}
-function normalize(key,row,i){if(key==='consolidado')return normConsolidado(row,i);if(key==='odtObras'||key==='odtProduccion')return normOdt(row,i,key);return normPersonal(row,i);}
-function normConsolidado(row,i){const id=(getField(row,['ID','Id','id','ID TAREA','ID SOLICITUD','N° SOLICITUD','Nº SOLICITUD','Código','Codigo'])||getCell(row,0)||'FILA-'+(i+2)).trim();const derRaw=(getField(row,['DERIVAR','Derivar','Área derivada','Area derivada'])||getCell(row,30)||'').trim();const der=DERIVAR_MAP[norm(derRaw)]||derRaw||'Sin derivación';const estado=(getField(row,['ESTADO','Estado','Situación','SITUACION'])||'Sin estado').trim();const fecha=parseDateFlex(getField(row,['Timestamp','Marca temporal','FECHA DE DERIVACION','FECHA DE DERIVACIÓN','FECHA','Fecha','fecha'])||getCell(row,0));const rubro=(getField(row,['RUBRO','Rubro','rubro'])||getCell(row,13)||'Sin rubro').trim();const item=(getField(row,['DESCRIPCION DEL ITEM','DESCRIPCIÓN DEL ITEM','Descripcion del item','Descripción del item','ITEM','Item','DESCRIPCION','DESCRIPCIÓN','Detalle','DETALLE'])||getCell(row,14)||'Sin descripción').trim();const efector=(getField(row,['Efector','EFECTOR','Establecimiento','ESTABLECIMIENTO','DESTINO','ORIGEN','Hospital','HOSPITAL','Centro','CENTRO'])||'Sin identificar').trim();const sector=(getField(row,['SECTOR SOLICITANTE','Sector solicitante','Sector','SECTOR','CUADRILLA'])||'Sin sector').trim();return {...row,__source:'consolidado',__id:id,__idKey:norm(id),__derivarRaw:derRaw,__derivar:der,__estado:estado,__fecha:fecha,__month:monthKey(fecha),__rubro:rubro,__item:item,__efector:efector,__sector:sector,__text:Object.values(row).join(' ').toLowerCase()};}
-function normOdt(row,i,key){const prod=key==='odtProduccion';const id=String((!prod?getCell(row,0):'')||getField(row,['ID','N° DE ORDEN','Nº DE ORDEN','ORDEN','N° ORDEN','Nº ORDEN'])||getCell(row,0)||((prod?'PR':'OB')+'-'+String(i+1).padStart(5,'0'))).trim();const rubro=String((!prod?getCell(row,7):'')||getField(row,['RUBRO','Rubro','rubro','SECCION','Sección','SECCIÓN'])||getCell(row,7)||'Sin rubro').trim();const fecha=parseDateFlex((!prod?getCell(row,2):'')||getField(row,['FECHA DE ORDEN DE TRABAJO','Fecha de orden de trabajo','FECHA ORDEN','Fecha orden','Marca temporal','Timestamp','FECHA','Fecha'])||getCell(row,2));const tarea=String(getField(row,['TAREA A REALIZAR','Tarea a realizar','DESCRIPCION','DESCRIPCIÓN','Detalle','DETALLE'])||'Sin tarea').trim();const destino=String(getField(row,['DESTINO','Destino','ESTABLECIMIENTO','Establecimiento'])||'Sin destino').trim();const estado=String(getField(row,['ESTADO','Estado','SITUACION','Situación'])||'Registrada').trim();const cuadrilla=String(getField(row,['CUADRILLA','Cuadrilla','CUADRILLAS','Cuadrillas','EQUIPO','Equipo','EQUIPO DE TRABAJO','Equipo de trabajo','PERSONAL','Personal','PERSONAL ASIGNADO','Personal asignado','OPERARIO','Operario','OPERARIOS','Operarios','AGENTE','Agente','RESPONSABLE','Responsable','ASIGNADO A','Asignado a'])||'Sin cuadrilla informada').trim();return {...row,__source:key,__sourceLabel:prod?'ODT Producción':'ODT Obras',__id:id,__idKey:norm(id),__fecha:fecha,__dayKey:isoDate(fecha),__rubro:rubro,__item:tarea,__efector:destino,__estado:estado,__cuadrilla:cuadrilla,__text:Object.values(row).join(' ').toLowerCase()};}
-function normPersonal(row,i){const fecha=parseDateFlex(getField(row,['Marca temporal','Timestamp','FECHA','Fecha'])||getCell(row,1));const agente=String(getField(row,['Nombre y Apellido','Apellido y Nombre','Agente','Nombre'])||'Sin agente').trim();const dni=String(getField(row,['DNI'])||'').trim();const sector=String(getField(row,['Sector','SECTOR'])||'Sin sector').trim();const motivo=String(getField(row,['Motivo','MOTIVO'])||'Sin motivo').trim();const destino=String(getField(row,['Destino (SI ES OFICIAL)','Destino','DESTINO'])||'').trim();const desde=String(getField(row,['desde horas','Desde horas','DESDE HORAS'])||'').trim();const hasta=String(getField(row,['hasta horas','Hasta horas','HASTA HORAS'])||'').trim();const obs=String(getField(row,['Observaciones','OBSERVACIONES'])||'').trim();const doc=String(getField(row,['DOC'])||'').trim();const id=String(getField(row,['ID'])||getCell(row,12)||('OS-'+String(i+1).padStart(5,'0'))).trim();return {...row,__source:'personal',__id:id,__idKey:norm(id),__fecha:fecha,__dayKey:isoDate(fecha),__agente:agente,__dni:dni,__sector:sector,__motivo:motivo,__destino:destino,__desde:desde,__hasta:hasta,__obs:obs,__doc:doc,__horas:hoursBetween(desde,hasta),__text:Object.values(row).join(' ').toLowerCase()};}
-
-function renderAll(){renderPendientes();renderOdt('obras');renderOdt('produccion');renderPersonal();renderInformeFinal();}
-function switchTab(tab){S.active=tab;document.querySelectorAll('.nav-item[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('sec-'+tab).classList.add('active');document.getElementById('top-title').textContent=META[tab].title;document.getElementById('top-sub').textContent=META[tab].sub;closeMenu();}
-
-function renderPendientes(){const sec=document.getElementById('sec-pendientes');const rows=buildPendientes();const months=[...new Set(rows.map(r=>r.month))].sort();if(!S.filters.pendMonth&&months.length)S.filters.pendMonth=months[months.length-1];const dept=S.filters.pendDept, month=S.filters.pendMonth, search=S.filters.pendSearch.toLowerCase();const detail=rows.filter(r=>(!dept||r.dept===dept)&&(!month||r.month===month)&&(!search||r.text.includes(search)));const summary=months.map(m=>{const arr=rows.filter(r=>r.month===m);return {month:m,do:arr.filter(x=>x.dept==='Dpto. Obras').length,dp:arr.filter(x=>x.dept==='Dpto. Producción').length,total:arr.length};});const total=rows.length, totalDO=rows.filter(r=>r.dept==='Dpto. Obras').length,totalDP=rows.filter(r=>r.dept==='Dpto. Producción').length;sec.innerHTML=`
-  <div class="hero"><h1>IDs pendientes mes a mes · DO / DP</h1><p>Lista de IDs del CONSOLIDADO que todavía no figuran como FINALIZADO. Se excluyen del análisis los estados <b>No califica</b> y <b>Mal cargado</b>.</p><div class="pill-row"><span class="pill">Desde fecha cero</span><span class="pill">Agrupado por mes de carga</span><span class="pill amber">Pendiente operativo</span></div></div>
-  <div class="toolbar"><div class="field"><label>Departamento</label><select id="pendDept" onchange="S.filters.pendDept=this.value;renderPendientes()"><option value="">DO + DP</option><option value="Dpto. Obras">Dpto. Obras</option><option value="Dpto. Producción">Dpto. Producción</option></select></div><div class="field"><label>Mes</label><select id="pendMonth" onchange="S.filters.pendMonth=this.value;renderPendientes()"><option value="">Todos</option>${months.map(m=>`<option value="${m}">${monthLabel(m)}</option>`).join('')}</select></div><div class="field"><label>Buscar ID / efector / rubro</label><input id="pendSearch" value="${esc(S.filters.pendSearch)}" oninput="S.filters.pendSearch=this.value;renderPendientes()" placeholder="Ej: T-00012, Padilla, electricidad"></div><button class="btn btn-primary" onclick="exportPendientesCSV()">Exportar CSV</button><button class="btn btn-teal" onclick="exportModulePDF('pendientes')">Exportar PDF</button></div>
-  <div class="kpi-grid"><div class="kpi amber"><span>Total pendientes</span><b>${fmt(total)}</b><small>DO + DP, desde fecha cero.</small></div><div class="kpi"><span>Dpto. Obras</span><b>${fmt(totalDO)}</b><small>IDs pendientes DO.</small></div><div class="kpi"><span>Dpto. Producción</span><b>${fmt(totalDP)}</b><small>IDs pendientes DP.</small></div><div class="kpi green"><span>Mes seleccionado</span><b>${fmt(detail.length)}</b><small>${month?monthLabel(month):'Todos los meses'}.</small></div></div>
-  <div class="grid-2" style="margin-top:12px"><div class="chart-card"><h3>Pendientes por mes</h3><p>Comparativo mensual DO / DP.</p><div class="chart-box"><canvas id="chartPendMes"></canvas></div></div><div class="table-card" style="margin-top:0"><div class="table-head"><h3>Resumen mensual</h3><button class="btn btn-ghost" onclick="S.filters.pendMonth='';renderPendientes()">Ver todos</button></div><div class="table-wrap"><table><thead><tr><th>Mes</th><th class="num">DO</th><th class="num">DP</th><th class="num">Total</th></tr></thead><tbody>${summary.map(r=>`<tr onclick="S.filters.pendMonth='${r.month}';renderPendientes()" style="cursor:pointer"><td><b>${monthLabel(r.month)}</b></td><td class="num">${fmt(r.do)}</td><td class="num">${fmt(r.dp)}</td><td class="num"><b>${fmt(r.total)}</b></td></tr>`).join('')}</tbody></table></div></div></div>
-  <div class="table-card"><div class="table-head"><h3>Detalle de IDs pendientes · ${month?monthLabel(month):'todos los meses'}</h3><span class="muted">${fmt(detail.length)} registros únicos</span></div><div class="table-wrap"><table><thead><tr><th>Mes</th><th>Depto.</th><th>ID</th><th>Fecha</th><th>Estado</th><th>Rubro</th><th>Efector</th><th>Detalle</th></tr></thead><tbody>${detail.slice(0,1000).map(r=>`<tr><td>${monthLabel(r.month)}</td><td><span class="badge blue">${esc(r.dept)}</span></td><td><b>${esc(r.id)}</b></td><td>${fmtDate(r.fecha)}</td><td><span class="badge amber">${esc(r.estado)}</span></td><td>${esc(r.rubro)}</td><td>${esc(r.efector)}</td><td>${esc(r.item)}</td></tr>`).join('')||'<tr><td colspan="8" class="empty">Sin pendientes para el filtro elegido.</td></tr>'}</tbody></table></div></div>`;setVal('pendDept',dept);setVal('pendMonth',month);drawPendChart(summary);}
-function buildPendientes(){const map=new Map();S.raw.consolidado.forEach(r=>{const der=DERIVAR_MAP[norm(r.__derivarRaw)]||r.__derivar; if(der!=='Dpto. Obras'&&der!=='Dpto. Producción')return; const e=norm(r.__estado); if(e.includes('FINALIZADO')||e.includes('NO CALIFICA')||e.includes('MAL CARGADO'))return; const key=r.__idKey||norm(r.__id); if(!key)return; const cur=map.get(key); if(!cur||((r.__fecha||0)<(cur.fecha||Infinity))){map.set(key,{id:r.__id,dept:der,fecha:r.__fecha,month:r.__month||'Sin fecha',estado:r.__estado,rubro:r.__rubro,efector:r.__efector,item:r.__item,text:[r.__id,der,r.__estado,r.__rubro,r.__efector,r.__item].join(' ').toLowerCase()});}});return [...map.values()].sort((a,b)=>(a.month||'').localeCompare(b.month||'')||a.dept.localeCompare(b.dept)||a.id.localeCompare(b.id));}
-function drawPendChart(summary){drawChart('pendMes','bar','chartPendMes',{labels:summary.map(x=>monthLabel(x.month)),datasets:[{label:'DO',data:summary.map(x=>x.do)},{label:'DP',data:summary.map(x=>x.dp)}]}, {responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}});}
-
-function renderOdt(kind){const key=kind==='obras'?'odtObras':'odtProduccion', tab=kind==='obras'?'odt-obras':'odt-produccion', sec=document.getElementById('sec-'+tab);const filterKey=kind==='obras'?'rubroObras':'rubroProd';const week=S.filters.week;const range=weekRange(week);const rows=S.raw[key].filter(r=>inDateRange(r.__fecha,range.start,range.end));const rubros=[...new Set(rows.map(r=>clean(r.__rubro)||'Sin rubro'))].sort((a,b)=>a.localeCompare(b,'es'));if(!S.filters[filterKey]&&rubros.length)S.filters[filterKey]=rubros[0];const selected=S.filters[filterKey];const filtered=rows.filter(r=>!selected||clean(r.__rubro)===selected);const dayData=DAYS.map((d,i)=>filtered.filter(r=>dayIndexMon(r.__fecha)===i).length);const total=filtered.length;const rubroSummary=rubros.map(rub=>({rubro:rub,total:rows.filter(r=>clean(r.__rubro)===rub).length}));sec.innerHTML=`<div class="hero"><h1>${kind==='obras'?'ODT Obras':'ODT Producción'} · semana en tránsito</h1><p>Cantidad de órdenes emitidas día por día, separadas por rubro en orden alfabético. Elegí un rubro y el gráfico muestra su movimiento dentro de la semana.</p><div class="pill-row"><span class="pill">Semana ${esc(week)}</span><span class="pill">${fmtDate(range.start)} al ${fmtDate(range.end)}</span><span class="pill green">${fmt(rows.length)} ODT totales semana</span></div></div>
-  <div class="toolbar"><div class="field"><label>Semana</label><input type="week" value="${esc(week)}" onchange="S.filters.week=this.value;renderOdt('obras');renderOdt('produccion')"></div><div class="field"><label>Rubro</label><select onchange="S.filters.${filterKey}=this.value;renderOdt('${kind}')"><option value="">Todos</option>${rubros.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('')}</select></div><button class="btn btn-primary" onclick="setCurrentWeek();renderOdt('obras');renderOdt('produccion')">Semana actual</button><button class="btn btn-ghost" onclick="S.filters.${filterKey}='';renderOdt('${kind}')">Todos los rubros</button><button class="btn btn-green" onclick="exportOdtCSV('${kind}')">Exportar CSV</button><button class="btn btn-teal" onclick="exportModulePDF('${tab}')">Exportar PDF</button><button class="btn btn-amber" onclick="exportOdtAllRubrosPDF('${kind}')">PDF evolución todos los rubros</button></div>
-  <div class="kpi-grid"><div class="kpi"><span>ODT semana</span><b>${fmt(rows.length)}</b><small>Total ${kind==='obras'?'Obras':'Producción'}.</small></div><div class="kpi green"><span>Rubro seleccionado</span><b>${fmt(total)}</b><small>${selected||'Todos los rubros'}.</small></div><div class="kpi amber"><span>Rubros activos</span><b>${fmt(rubros.length)}</b><small>Con ODT en la semana.</small></div><div class="kpi"><span>Día pico</span><b>${DAYS[dayData.indexOf(Math.max(...dayData,0))]||'—'}</b><small>${fmt(Math.max(...dayData,0))} órdenes.</small></div></div>
-  <div class="grid-2" style="margin-top:12px"><div class="chart-card"><h3>Órdenes por día · ${esc(selected||'Todos los rubros')}</h3><p>Gráfico de barras de la semana seleccionada.</p><div class="chart-box"><canvas id="chart-${tab}"></canvas></div></div><div class="table-card" style="margin-top:0"><div class="table-head"><h3>Rubros en orden alfabético</h3><span class="muted">Semana</span></div><div class="table-wrap"><table><thead><tr><th>Rubro</th><th class="num">Total</th></tr></thead><tbody>${rubroSummary.map(r=>`<tr onclick="S.filters.${filterKey}='${escAttr(r.rubro)}';renderOdt('${kind}')" style="cursor:pointer"><td><b>${esc(r.rubro)}</b></td><td class="num">${fmt(r.total)}</td></tr>`).join('')||'<tr><td colspan="2" class="empty">Sin ODT para esta semana.</td></tr>'}</tbody></table></div></div></div>
-  <div class="table-card"><div class="table-head"><h3>Detalle · ${esc(selected||'Todos los rubros')}</h3><span class="muted">${fmt(filtered.length)} órdenes</span></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Día</th><th>ID</th><th>Rubro</th><th>Destino</th><th>Tarea</th><th>Estado</th></tr></thead><tbody>${filtered.map(r=>`<tr><td>${fmtDate(r.__fecha)}</td><td>${DAYS[dayIndexMon(r.__fecha)]||'—'}</td><td><b>${esc(r.__id)}</b></td><td>${esc(r.__rubro)}</td><td>${esc(r.__efector)}</td><td>${esc(r.__item)}</td><td><span class="badge gray">${esc(r.__estado)}</span></td></tr>`).join('')||'<tr><td colspan="7" class="empty">Sin datos.</td></tr>'}</tbody></table></div></div>`;sec.querySelector('select').value=selected;drawChart(tab,'bar','chart-'+tab,{labels:DAYS,datasets:[{label:selected||'Todos los rubros',data:dayData}]},{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,ticks:{precision:0}}}});}
-
-function renderPersonal(){const sec=document.getElementById('sec-personal');const week=S.filters.personalWeek;const range=weekRange(week);const search=S.filters.personalSearch.toLowerCase();const rows=S.raw.personal.filter(r=>inDateRange(r.__fecha,range.start,range.end)&&(!search||r.__text.includes(search)||r.__agente.toLowerCase().includes(search)));const byDay=DAYS.map((d,i)=>rows.filter(r=>dayIndexMon(r.__fecha)===i));const oficiales=rows.filter(r=>norm(r.__motivo).includes('OFICIAL')).length;const particulares=rows.filter(r=>norm(r.__motivo).includes('PARTICULAR')).length;const agentes=groupBy(rows,r=>norm(r.__agente)||'SIN AGENTE');const agenteRows=[...agentes.values()].map(arr=>{const first=arr[0];return {agente:first.__agente,dni:first.__dni,sector:first.__sector,total:arr.length,oficiales:arr.filter(r=>norm(r.__motivo).includes('OFICIAL')).length,particulares:arr.filter(r=>norm(r.__motivo).includes('PARTICULAR')).length,horas:arr.reduce((s,r)=>s+(r.__horas||0),0),ultima:arr.map(r=>r.__fecha).filter(Boolean).sort((a,b)=>b-a)[0]};}).sort((a,b)=>b.total-a.total||a.agente.localeCompare(b.agente,'es'));
-sec.innerHTML=`<div class="hero"><h1>Personal · comisiones de servicio y salidas</h1><p>Monitoreo semanal de salidas cargadas por formulario: día por día, por agente, sector, motivo, destino y horario.</p><div class="pill-row"><span class="pill">Formulario salida</span><span class="pill">Semana ${esc(week)}</span><span class="pill green">${fmt(rows.length)} salidas</span></div></div>
-  <div class="toolbar"><div class="field"><label>Semana</label><input type="week" value="${esc(week)}" onchange="S.filters.personalWeek=this.value;renderPersonal()"></div><div class="field"><label>Buscar agente / sector / destino</label><input value="${esc(S.filters.personalSearch)}" oninput="S.filters.personalSearch=this.value;renderPersonal()" placeholder="Ej: Nain, Carpintería, Padilla"></div><button class="btn btn-primary" onclick="S.filters.personalWeek=currentWeekStr();renderPersonal()">Semana actual</button><button class="btn btn-green" onclick="exportPersonalCSV()">Exportar CSV</button><button class="btn btn-teal" onclick="exportModulePDF('personal')">Exportar PDF</button></div>
-  <div class="kpi-grid"><div class="kpi"><span>Total salidas</span><b>${fmt(rows.length)}</b><small>Semana seleccionada.</small></div><div class="kpi green"><span>Comisiones oficiales</span><b>${fmt(oficiales)}</b><small>Motivo OFICIAL.</small></div><div class="kpi amber"><span>Particulares</span><b>${fmt(particulares)}</b><small>1 hora semanal u otros.</small></div><div class="kpi"><span>Agentes</span><b>${fmt(agenteRows.length)}</b><small>Con al menos una salida.</small></div></div>
-  <div class="grid-2" style="margin-top:12px"><div class="chart-card"><h3>Salidas por día</h3><p>Comisiones y salidas de la semana.</p><div class="chart-box"><canvas id="chartPersonalDias"></canvas></div></div><div class="table-card" style="margin-top:0"><div class="table-head"><h3>Resumen por día</h3><span class="muted">${fmtDate(range.start)} al ${fmtDate(range.end)}</span></div><div class="table-wrap"><table><thead><tr><th>Día</th><th class="num">Total</th><th class="num">Oficial</th><th class="num">Particular</th></tr></thead><tbody>${byDay.map((arr,i)=>`<tr><td><b>${DAYS[i]}</b></td><td class="num">${fmt(arr.length)}</td><td class="num">${fmt(arr.filter(r=>norm(r.__motivo).includes('OFICIAL')).length)}</td><td class="num">${fmt(arr.filter(r=>norm(r.__motivo).includes('PARTICULAR')).length)}</td></tr>`).join('')}</tbody></table></div></div></div>
-  <div class="table-card"><div class="table-head"><h3>Tabla por agente</h3><span class="muted">Comisiones/salidas acumuladas</span></div><div class="table-wrap"><table><thead><tr><th>Agente</th><th>DNI</th><th>Sector</th><th class="num">Total</th><th class="num">Oficial</th><th class="num">Particular</th><th class="num">Horas estimadas</th><th>Última salida</th></tr></thead><tbody>${agenteRows.map(a=>`<tr><td><b>${esc(a.agente)}</b></td><td>${esc(a.dni)}</td><td>${esc(a.sector)}</td><td class="num"><b>${fmt(a.total)}</b></td><td class="num">${fmt(a.oficiales)}</td><td class="num">${fmt(a.particulares)}</td><td class="num">${a.horas?fmtDec(a.horas):'—'}</td><td>${fmtDate(a.ultima)}</td></tr>`).join('')||'<tr><td colspan="8" class="empty">Sin salidas.</td></tr>'}</tbody></table></div></div>
-  <div class="table-card"><div class="table-head"><h3>Detalle de comisiones y salidas</h3><span class="muted">${fmt(rows.length)} registros</span></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>ID</th><th>Agente</th><th>Sector</th><th>Motivo</th><th>Destino</th><th>Horario</th><th>Observaciones</th><th>DOC</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${fmtDate(r.__fecha)}</td><td><b>${esc(r.__id)}</b></td><td>${esc(r.__agente)}</td><td>${esc(r.__sector)}</td><td><span class="badge ${norm(r.__motivo).includes('OFICIAL')?'green':'amber'}">${esc(r.__motivo)}</span></td><td>${esc(r.__destino)}</td><td>${esc(r.__desde)} → ${esc(r.__hasta)}</td><td>${esc(r.__obs)}</td><td>${r.__doc?`<a href="${escAttr(r.__doc)}" target="_blank">Abrir</a>`:'—'}</td></tr>`).join('')||'<tr><td colspan="9" class="empty">Sin registros.</td></tr>'}</tbody></table></div></div>`;drawChart('personalDias','bar','chartPersonalDias',{labels:DAYS,datasets:[{label:'Salidas',data:byDay.map(a=>a.length)},{label:'Oficial',data:byDay.map(a=>a.filter(r=>norm(r.__motivo).includes('OFICIAL')).length)},{label:'Particular',data:byDay.map(a=>a.filter(r=>norm(r.__motivo).includes('PARTICULAR')).length)}]},{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,ticks:{precision:0}}}});}
-
-
-function renderInformeFinal(){const sec=document.getElementById('sec-informe');if(!sec)return;const p=getPendingStats();const oo=getOdtStats('obras');const op=getOdtStats('produccion');const per=getPersonalStats();const crit=buildExecutiveFindings(p,oo,op,per);sec.innerHTML=`
-  <div class="hero"><h1>Informe integral de supervisión DMTH</h1><p>Lectura consolidada para Dirección: pendientes históricos DO/DP, emisión semanal de ODT Obras, emisión semanal de ODT Producción y movimiento de personal por comisiones/salidas.</p><div class="pill-row"><span class="pill">Corte: ${new Date().toLocaleString('es-AR')}</span><span class="pill green">Diseño profesional</span><span class="pill">DI Emiliano Villagra Abadie</span></div><div class="report-actions"><button class="btn btn-primary" onclick="exportInformeIntegralPDF()">📘 Exportar informe integral PDF</button><button class="btn btn-ghost" onclick="refreshAll()">🔄 Actualizar datos</button></div></div>
-  <div class="kpi-grid"><div class="kpi amber"><span>Pendientes DO/DP</span><b>${fmt(p.total)}</b><small>Sin finalizado, sin No califica ni Mal cargado.</small></div><div class="kpi"><span>ODT Obras semana</span><b>${fmt(oo.total)}</b><small>${fmtDate(oo.range.start)} al ${fmtDate(oo.range.end)}.</small></div><div class="kpi"><span>ODT Producción semana</span><b>${fmt(op.total)}</b><small>${fmtDate(op.range.start)} al ${fmtDate(op.range.end)}.</small></div><div class="kpi green"><span>Salidas personal semana</span><b>${fmt(per.total)}</b><small>${fmt(per.agentes.length)} agentes con movimiento.</small></div></div>
-  <div class="grid-2" style="margin-top:12px"><div class="card"><h3>Lectura ejecutiva</h3><ul>${crit.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div class="card"><h3>Recomendaciones de conducción</h3><ul><li>Entregar al supervisor de Obras y Producción el listado mensual de IDs pendientes para confirmar continuidad, cierre o recategorización.</li><li>Usar la emisión diaria de ODT por rubro como indicador de carga real de talleres durante la semana.</li><li>Contrastar comisiones/salidas de personal con la producción diaria de ODT para detectar capacidad operativa disponible.</li><li>Solicitar cierre administrativo inmediato de tareas ejecutadas que continúan abiertas en el sistema.</li></ul></div></div>
-  <div class="grid-3" style="margin-top:12px"><div class="card"><h3>Pendientes por departamento</h3><p><b>DO:</b> ${fmt(p.totalDO)}<br><b>DP:</b> ${fmt(p.totalDP)}</p><p class="report-note">Mes con mayor acumulación: <b>${esc(p.topMonthLabel)}</b>.</p></div><div class="card"><h3>Rubros ODT destacados</h3><p><b>Obras:</b> ${esc(oo.topRubroLabel)}<br><b>Producción:</b> ${esc(op.topRubroLabel)}</p><p class="report-note">Semana actual del sistema: ${esc(S.filters.week)}.</p></div><div class="card"><h3>Personal</h3><p><b>Oficiales:</b> ${fmt(per.oficiales)}<br><b>Particulares:</b> ${fmt(per.particulares)}<br><b>Horas estimadas:</b> ${fmtDec(per.horas)}</p></div></div>
-  <div class="table-card"><div class="table-head"><h3>Resumen integral</h3><span class="muted">Para análisis directivo</span></div><div class="table-wrap"><table><thead><tr><th>Módulo</th><th>Indicador</th><th class="num">Valor</th><th>Observación</th></tr></thead><tbody>
-  <tr><td>Pendientes</td><td>Total DO/DP</td><td class="num"><b>${fmt(p.total)}</b></td><td>IDs sin estado finalizado válido.</td></tr>
-  <tr><td>Pendientes</td><td>Dpto. Obras</td><td class="num">${fmt(p.totalDO)}</td><td>Seguimiento histórico por mes.</td></tr>
-  <tr><td>Pendientes</td><td>Dpto. Producción</td><td class="num">${fmt(p.totalDP)}</td><td>Seguimiento histórico por mes.</td></tr>
-  <tr><td>ODT Obras</td><td>Órdenes semana</td><td class="num">${fmt(oo.total)}</td><td>${esc(oo.topRubroLabel)}</td></tr>
-  <tr><td>ODT Producción</td><td>Órdenes semana</td><td class="num">${fmt(op.total)}</td><td>${esc(op.topRubroLabel)}</td></tr>
-  <tr><td>Personal</td><td>Salidas semana</td><td class="num">${fmt(per.total)}</td><td>${fmt(per.agentes.length)} agentes registrados.</td></tr>
-  </tbody></table></div></div>`;}
-
-function getPendingStats(){const rows=buildPendientes();const months=[...new Set(rows.map(r=>r.month))].sort();const monthRows=months.map(m=>{const arr=rows.filter(r=>r.month===m);return {month:m,label:monthLabel(m),do:arr.filter(x=>x.dept==='Dpto. Obras').length,dp:arr.filter(x=>x.dept==='Dpto. Producción').length,total:arr.length};});const top=monthRows.slice().sort((a,b)=>b.total-a.total)[0]||{label:'Sin datos',total:0};return {rows,months,monthRows,total:rows.length,totalDO:rows.filter(r=>r.dept==='Dpto. Obras').length,totalDP:rows.filter(r=>r.dept==='Dpto. Producción').length,topMonth:top,topMonthLabel:top.label};}
-function getOdtStats(kind){const key=kind==='obras'?'odtObras':'odtProduccion';const filterKey=kind==='obras'?'rubroObras':'rubroProd';const week=S.filters.week||currentWeekStr();const range=weekRange(week);const rows=S.raw[key].filter(r=>inDateRange(r.__fecha,range.start,range.end));const rubros=[...new Set(rows.map(r=>clean(r.__rubro)||'Sin rubro'))].sort((a,b)=>a.localeCompare(b,'es'));const selected=S.filters[filterKey]||'';const filtered=rows.filter(r=>!selected||clean(r.__rubro)===selected);const dayData=DAYS.map((d,i)=>filtered.filter(r=>dayIndexMon(r.__fecha)===i).length);const rubroSummary=rubros.map(rub=>({rubro:rub,total:rows.filter(r=>clean(r.__rubro)===rub).length})).sort((a,b)=>b.total-a.total||a.rubro.localeCompare(b.rubro,'es'));const top=rubroSummary[0]||{rubro:'Sin datos',total:0};return {kind,key,week,range,rows,filtered,total:rows.length,totalFiltered:filtered.length,rubros,selected,dayData,rubroSummary,topRubro:top,topRubroLabel:top.total?`${top.rubro} (${fmt(top.total)})`:'Sin datos'};}
-function getPersonalStats(){const week=S.filters.personalWeek||currentWeekStr();const range=weekRange(week);const search=(S.filters.personalSearch||'').toLowerCase();const rows=S.raw.personal.filter(r=>inDateRange(r.__fecha,range.start,range.end)&&(!search||r.__text.includes(search)||r.__agente.toLowerCase().includes(search)));const byDay=DAYS.map((d,i)=>rows.filter(r=>dayIndexMon(r.__fecha)===i));const oficiales=rows.filter(r=>norm(r.__motivo).includes('OFICIAL')).length;const particulares=rows.filter(r=>norm(r.__motivo).includes('PARTICULAR')).length;const agentes=[...groupBy(rows,r=>norm(r.__agente)||'SIN AGENTE').values()].map(arr=>{const first=arr[0];return {agente:first.__agente,dni:first.__dni,sector:first.__sector,total:arr.length,oficiales:arr.filter(r=>norm(r.__motivo).includes('OFICIAL')).length,particulares:arr.filter(r=>norm(r.__motivo).includes('PARTICULAR')).length,horas:arr.reduce((s,r)=>s+(r.__horas||0),0),ultima:arr.map(r=>r.__fecha).filter(Boolean).sort((a,b)=>b-a)[0]};}).sort((a,b)=>b.total-a.total||a.agente.localeCompare(b.agente,'es'));return {week,range,rows,byDay,total:rows.length,oficiales,particulares,agentes,horas:rows.reduce((s,r)=>s+(r.__horas||0),0)};}
-function buildExecutiveFindings(p,oo,op,per){const out=[];out.push(`Se registran ${fmt(p.total)} IDs pendientes históricos DO/DP en el CONSOLIDADO, excluyendo Finalizado, No califica y Mal cargado.`);out.push(`La distribución pendiente actual es: Dpto. Obras ${fmt(p.totalDO)} y Dpto. Producción ${fmt(p.totalDP)}.`);out.push(`En la semana analizada, ODT Obras emitió ${fmt(oo.total)} órdenes; el rubro con mayor movimiento es ${oo.topRubroLabel}.`);out.push(`En la semana analizada, ODT Producción emitió ${fmt(op.total)} órdenes; el rubro con mayor movimiento es ${op.topRubroLabel}.`);out.push(`Personal registra ${fmt(per.total)} salidas/comisiones, con ${fmt(per.oficiales)} oficiales y ${fmt(per.particulares)} particulares.`);return out;}
-
-function exportCurrentPDF(){return exportModulePDF(S.active);}
-function exportModulePDF(tab){if(tab==='informe')return exportInformeIntegralPDF();let title=META[tab]?.title||'Módulo';let subtitle=META[tab]?.sub||'';let body='';if(tab==='pendientes')body=pdfPendientesHTML();else if(tab==='odt-obras')body=pdfOdtHTML('obras');else if(tab==='odt-produccion')body=pdfOdtHTML('produccion');else if(tab==='personal')body=pdfPersonalHTML();else body='<p>Sin módulo seleccionado.</p>';openPdfWindow(title,subtitle,body);}
-function exportInformeIntegralPDF(){const p=getPendingStats(),oo=getOdtStats('obras'),op=getOdtStats('produccion'),per=getPersonalStats(),findings=buildExecutiveFindings(p,oo,op,per);const body=`<section><h2>1. Resumen ejecutivo integral</h2><div class="pdf-kpis"><div><b>${fmt(p.total)}</b><span>Pendientes DO/DP</span></div><div><b>${fmt(oo.total)}</b><span>ODT Obras semana</span></div><div><b>${fmt(op.total)}</b><span>ODT Producción semana</span></div><div><b>${fmt(per.total)}</b><span>Salidas personal semana</span></div></div><ul>${findings.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section><section><h2>2. Pendientes históricos DO/DP</h2>${pdfPendingSummaryTable(p)}${pdfTable(['Mes','DO','DP','Total'],p.monthRows.slice(-12).map(r=>[r.label,fmt(r.do),fmt(r.dp),fmt(r.total)]))}</section><section><h2>3. ODT Obras semanal</h2>${pdfOdtSummaryBlock(oo)}${pdfTable(['Rubro','Total semana'],oo.rubroSummary.map(r=>[r.rubro,fmt(r.total)]))}</section><section><h2>4. ODT Producción semanal</h2>${pdfOdtSummaryBlock(op)}${pdfTable(['Rubro','Total semana'],op.rubroSummary.map(r=>[r.rubro,fmt(r.total)]))}</section><section><h2>5. Personal · comisiones y salidas</h2>${pdfPersonalSummaryBlock(per)}${pdfTable(['Agente','Sector','Total','Oficial','Particular','Horas'],per.agentes.slice(0,60).map(a=>[a.agente,a.sector,fmt(a.total),fmt(a.oficiales),fmt(a.particulares),fmtDec(a.horas)]))}</section><section><h2>6. Recomendaciones finales</h2><ol><li>Validar mensualmente los IDs pendientes con cada supervisor para definir cierre, continuidad o recategorización.</li><li>Usar los gráficos de ODT por rubro como indicador de carga operativa semanal.</li><li>Contrastar salidas de personal con emisión de ODT para evaluar disponibilidad real de equipos.</li><li>Solicitar actualización administrativa de tareas ejecutadas que continúan abiertas.</li></ol></section>`;openPdfWindow('Informe integral de supervisión DMTH','Pendientes DO/DP · ODT Obras · ODT Producción · Personal',body);}
-
-function pdfPendientesHTML(){const p=getPendingStats();return `<section><h2>Resumen de pendientes DO/DP</h2>${pdfPendingSummaryTable(p)}<p>Se excluyen estados Finalizado, No califica y Mal cargado.</p></section><section><h2>Pendientes por mes</h2>${pdfTable(['Mes','DO','DP','Total'],p.monthRows.map(r=>[r.label,fmt(r.do),fmt(r.dp),fmt(r.total)]))}</section><section><h2>Detalle de IDs pendientes</h2>${pdfTable(['Mes','Departamento','ID','Fecha','Estado','Rubro','Efector','Detalle'],p.rows.slice(0,400).map(r=>[monthLabel(r.month),r.dept,r.id,fmtDate(r.fecha),r.estado,r.rubro,r.efector,r.item]))}</section>`;}
-function pdfOdtHTML(kind){const st=getOdtStats(kind);return `<section><h2>${kind==='obras'?'ODT Obras':'ODT Producción'} · semana ${esc(st.week)}</h2>${pdfOdtSummaryBlock(st)}</section><section><h2>Resumen por día</h2>${pdfTable(['Día','Cantidad'],DAYS.map((d,i)=>[d,fmt(st.dayData[i])]))}</section><section><h2>Rubros en orden alfabético</h2>${pdfTable(['Rubro','Total semana'],st.rubroSummary.slice().sort((a,b)=>a.rubro.localeCompare(b.rubro,'es')).map(r=>[r.rubro,fmt(r.total)]))}</section><section><h2>Detalle de órdenes</h2>${pdfTable(['Fecha','Día','ID','Rubro','Destino','Tarea','Estado'],st.filtered.slice(0,350).map(r=>[fmtDate(r.__fecha),DAYS[dayIndexMon(r.__fecha)]||'',r.__id,r.__rubro,r.__efector,r.__item,r.__estado]))}</section>`;}
-
-function exportOdtAllRubrosPDF(kind){const st=getOdtStats(kind);const title=(kind==='obras'?'ODT Obras':'ODT Producción')+' · evolución semanal por rubro';const rubros=st.rubros.slice().sort((a,b)=>a.localeCompare(b,'es'));if(!rubros.length){openPdfWindow(title,'Semana '+st.week,'<section><h2>Sin datos</h2><p>No se registran órdenes en la semana seleccionada.</p></section>');return;}toast('Generando gráficos para PDF...');setTimeout(()=>{const charts=rubros.map(rub=>{const rubRows=st.rows.filter(x=>clean(x.__rubro)===rub);const data=DAYS.map((d,i)=>rubRows.filter(x=>dayIndexMon(x.__fecha)===i).length);const total=data.reduce((a,b)=>a+b,0);return {rubro:rub,total,data,img:makeBarChartImage(DAYS,data,rub),cuadrillas:pdfCuadrillasPorDia(rubRows)};});const body=`<section><h2>Resumen general</h2>${pdfOdtSummaryBlock({...st,selected:'Todos los rubros',totalFiltered:st.total})}<p>Este reporte muestra la evolución semanal de <b>todos los rubros</b>, uno debajo de otro, con gráficos compactos, valores visibles sobre cada barra y detalle de cuadrillas por día para cada rubro.</p>${pdfTable(['Rubro','Lun','Mar','Mié','Jue','Vie','Sáb','Dom','Total'],charts.map(c=>[c.rubro,...c.data.map(n=>fmt(n)),fmt(c.total)]))}</section><section><h2>Gráficos por rubro</h2>${charts.map(c=>`<div class="chart-page-block"><h3>${esc(c.rubro)} · total semana: ${fmt(c.total)}</h3><img class="pdf-chart-img" src="${c.img}" alt="${esc(c.rubro)}">${c.cuadrillas}</div>`).join('')}</section>`;openPdfWindow(title,`Semana ${esc(st.week)} · ${fmtDate(st.range.start)} al ${fmtDate(st.range.end)}`,body);},60);}
-
-function cuadrillaNombre(r){return clean(r.__cuadrilla||getField(r,['CUADRILLA','Cuadrilla','CUADRILLAS','Cuadrillas','EQUIPO','Equipo','EQUIPO DE TRABAJO','Equipo de trabajo','PERSONAL','Personal','PERSONAL ASIGNADO','Personal asignado','OPERARIO','Operario','OPERARIOS','Operarios','AGENTE','Agente','RESPONSABLE','Responsable','ASIGNADO A','Asignado a'])||'Sin cuadrilla informada');}
-function pdfCuadrillasPorDia(rows){
-  const body=DAYS.map((day,i)=>{
-    const arr=rows.filter(r=>dayIndexMon(r.__fecha)===i);
-    if(!arr.length)return `<tr><td>${esc(day)}</td><td class="muted-cell">Sin ODT</td></tr>`;
-    const map=new Map();
-    arr.forEach(r=>{const c=cuadrillaNombre(r);map.set(c,(map.get(c)||0)+1);});
-    const txt=[...map.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'es')).map(([c,n])=>`<span class="crew-chip">${esc(c)}: <b>${fmt(n)}</b></span>`).join(' ');
-    return `<tr><td>${esc(day)}</td><td>${txt}</td></tr>`;
-  }).join('');
-  return `<div class="crew-box"><div class="crew-title">Cuadrillas / agentes por día · dentro de este rubro</div><table class="crew-table"><tbody>${body}</tbody></table></div>`;
-}
-function makeBarChartImage(labels,data,label){const canvas=document.createElement('canvas');canvas.width=980;canvas.height=230;const max=Math.max(...data,0);const valueLabels={id:'valueLabels',afterDatasetsDraw(chart){const{ctx}=chart;ctx.save();ctx.font='bold 17px Segoe UI, Arial';ctx.fillStyle='#0D1B2A';ctx.textAlign='center';ctx.textBaseline='bottom';chart.getDatasetMeta(0).data.forEach((bar,i)=>{const v=data[i]||0;if(v>0){const y=Math.max(bar.y-4,18);ctx.fillText(String(v),bar.x,y);}else{ctx.font='bold 13px Segoe UI, Arial';ctx.fillStyle='#64748B';ctx.fillText('0',bar.x,chart.chartArea.bottom-3);ctx.font='bold 17px Segoe UI, Arial';ctx.fillStyle='#0D1B2A';}});ctx.restore();}};const chart=new Chart(canvas,{type:'bar',data:{labels,datasets:[{label,data,borderRadius:5,barPercentage:.72,categoryPercentage:.72}]},options:{responsive:false,animation:false,layout:{padding:{top:22,right:16,left:8,bottom:0}},plugins:{legend:{display:false},title:{display:false},tooltip:{enabled:false}},scales:{y:{beginAtZero:true,suggestedMax:max?Math.ceil(max*1.25):1,ticks:{precision:0,font:{size:11}},grid:{color:'#E2E8F0'}},x:{ticks:{font:{size:12,weight:'700'},color:'#334155'},grid:{display:false}}}},plugins:[valueLabels]});const img=canvas.toDataURL('image/png',1);chart.destroy();return img;}
-function pdfPersonalHTML(){const per=getPersonalStats();return `<section><h2>Personal · semana ${esc(per.week)}</h2>${pdfPersonalSummaryBlock(per)}</section><section><h2>Resumen por día</h2>${pdfTable(['Día','Total','Oficial','Particular'],per.byDay.map((arr,i)=>[DAYS[i],fmt(arr.length),fmt(arr.filter(r=>norm(r.__motivo).includes('OFICIAL')).length),fmt(arr.filter(r=>norm(r.__motivo).includes('PARTICULAR')).length)]))}</section><section><h2>Tabla por agente</h2>${pdfTable(['Agente','DNI','Sector','Total','Oficial','Particular','Horas'],per.agentes.map(a=>[a.agente,a.dni,a.sector,fmt(a.total),fmt(a.oficiales),fmt(a.particulares),fmtDec(a.horas)]))}</section><section><h2>Detalle de comisiones y salidas</h2>${pdfTable(['Fecha','ID','Agente','Sector','Motivo','Destino','Horario','Observaciones'],per.rows.slice(0,400).map(r=>[fmtDate(r.__fecha),r.__id,r.__agente,r.__sector,r.__motivo,r.__destino,`${r.__desde} → ${r.__hasta}`,r.__obs]))}</section>`;}
-function pdfPendingSummaryTable(p){return `<div class="pdf-kpis"><div><b>${fmt(p.total)}</b><span>Total pendientes</span></div><div><b>${fmt(p.totalDO)}</b><span>Dpto. Obras</span></div><div><b>${fmt(p.totalDP)}</b><span>Dpto. Producción</span></div><div><b>${esc(p.topMonthLabel)}</b><span>Mes mayor acumulación</span></div></div>`;}
-function pdfOdtSummaryBlock(st){return `<div class="pdf-kpis"><div><b>${fmt(st.total)}</b><span>Total semana</span></div><div><b>${fmt(st.totalFiltered)}</b><span>Rubro seleccionado</span></div><div><b>${esc(st.selected||'Todos')}</b><span>Filtro rubro</span></div><div><b>${esc(st.topRubroLabel)}</b><span>Rubro destacado</span></div></div><p>Período: ${fmtDate(st.range.start)} al ${fmtDate(st.range.end)}.</p>`;}
-function pdfPersonalSummaryBlock(per){return `<div class="pdf-kpis"><div><b>${fmt(per.total)}</b><span>Total salidas</span></div><div><b>${fmt(per.oficiales)}</b><span>Oficiales</span></div><div><b>${fmt(per.particulares)}</b><span>Particulares</span></div><div><b>${fmt(per.agentes.length)}</b><span>Agentes</span></div></div><p>Período: ${fmtDate(per.range.start)} al ${fmtDate(per.range.end)}. Horas estimadas: ${fmtDec(per.horas)}.</p>`;}
-function pdfTable(headers,rows){return `<table class="pdf-table"><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${(rows&&rows.length?rows:[headers.map(()=> 'Sin datos')]).map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;}
-function openPdfWindow(title,subtitle,body){const now=new Date();const html=`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(title)}</title><style>@page{size:A4;margin:14mm 12mm 16mm}*{box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;color:#1E293B;margin:0;background:#fff;font-size:11px}.pdf-header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #2563EB;padding-bottom:10px;margin-bottom:14px}.brand{display:flex;gap:10px;align-items:center}.mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#0D1B2A,#2563EB);color:white;display:grid;place-items:center;font-weight:950;font-size:15px}.h-title{font-size:18px;font-weight:950;color:#0D1B2A}.h-sub{font-size:10px;color:#64748B;margin-top:3px}.meta{text-align:right;font-size:9.5px;color:#475569;line-height:1.45}.pdf-footer{position:fixed;left:0;right:0;bottom:0;border-top:1px solid #CBD5E1;padding-top:5px;display:flex;justify-content:space-between;color:#64748B;font-size:8.8px}.content{padding-bottom:18px}h1{font-size:20px;margin:0 0 4px;color:#0D1B2A}h2{font-size:13px;margin:16px 0 7px;color:#0D1B2A;border-left:4px solid #2563EB;padding-left:7px}p,li{font-size:10.5px;line-height:1.45;color:#334155}.pdf-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 10px}.pdf-kpis div{border:1px solid #DDE7F2;border-radius:10px;padding:9px;background:#F8FAFC}.pdf-kpis b{display:block;font-size:16px;color:#0D1B2A;line-height:1.1}.pdf-kpis span{display:block;font-size:8.4px;color:#64748B;text-transform:uppercase;font-weight:900;margin-top:4px}.pdf-table{width:100%;border-collapse:collapse;margin-top:6px;page-break-inside:auto}.pdf-table th{background:#0D1B2A;color:white;font-size:8.3px;text-align:left;padding:5px;border:1px solid #0D1B2A;text-transform:uppercase}.pdf-table td{font-size:8.7px;padding:4.5px 5px;border:1px solid #E2E8F0;vertical-align:top}.pdf-table tr:nth-child(even) td{background:#F8FAFC}section{break-inside:auto;margin-bottom:10px}tr{page-break-inside:avoid}.chart-page-block{break-inside:avoid;page-break-inside:avoid;border:1px solid #DDE7F2;border-radius:10px;padding:6px 8px;margin:6px 0;background:#FFFFFF}.chart-page-block h3{font-size:10.3px;margin:0 0 3px;color:#0D1B2A}.pdf-chart-img{display:block;width:100%;height:auto;max-height:122px;object-fit:contain}.crew-box{margin-top:4px;border-top:1px dashed #CBD5E1;padding-top:4px}.crew-title{font-size:8.4px;text-transform:uppercase;letter-spacing:.3px;color:#475569;font-weight:950;margin-bottom:3px}.crew-table{width:100%;border-collapse:collapse}.crew-table td{font-size:7.8px;padding:2.4px 3px;border:1px solid #E2E8F0;vertical-align:top}.crew-table td:first-child{width:70px;background:#F8FAFC;font-weight:900;color:#334155}.crew-chip{display:inline-block;margin:1px 2px 1px 0;padding:1.5px 4px;border-radius:999px;background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;font-weight:700}.muted-cell{color:#94A3B8}.chart-page-block:nth-child(3n){page-break-after:always}@media print{button{display:none}.pdf-footer{position:fixed}}</style></head><body><div class="pdf-header"><div class="brand"><div class="mark">DM</div><div><div class="h-title">Dirección de Mantenimiento Técnico Hospitalario</div><div class="h-sub">${esc(title)} · ${esc(subtitle)}</div></div></div><div class="meta"><b>Reporte de supervisión</b><br>Generado: ${now.toLocaleString('es-AR')}<br>Fuente: Dashboard DMTH</div></div><main class="content"><h1>${esc(title)}</h1><p>${esc(subtitle)}</p>${body}</main><div class="pdf-footer"><span>Diseño y desarrollo: DI Emiliano Villagra Abadie</span><span>DMTH · Supervisión Operativa</span></div><script>window.onload=()=>setTimeout(()=>window.print(),350)<\/script></body></html>`;const w=window.open('','_blank');if(!w){toast('El navegador bloqueó la ventana PDF');return;}w.document.open();w.document.write(html);w.document.close();toast('PDF preparado para imprimir/guardar');}
-
-function exportCurrentCSV(){if(S.active==='pendientes')return exportPendientesCSV();if(S.active==='odt-obras')return exportOdtCSV('obras');if(S.active==='odt-produccion')return exportOdtCSV('produccion');if(S.active==='personal')return exportPersonalCSV();toast('El informe integral se exporta en PDF');}
-function exportPendientesCSV(){const rows=buildPendientes().map(r=>[r.month,monthLabel(r.month),r.dept,r.id,fmtDate(r.fecha),r.estado,r.rubro,r.efector,r.item]);downloadCSV('pendientes_do_dp.csv',[['Mes','Mes texto','Departamento','ID','Fecha','Estado','Rubro','Efector','Detalle'],...rows]);}
-function exportOdtCSV(kind){const key=kind==='obras'?'odtObras':'odtProduccion';const range=weekRange(S.filters.week);const rows=S.raw[key].filter(r=>inDateRange(r.__fecha,range.start,range.end)).map(r=>[fmtDate(r.__fecha),DAYS[dayIndexMon(r.__fecha)]||'',r.__id,r.__rubro,r.__efector,r.__item,r.__estado]);downloadCSV(`odt_${kind}_${S.filters.week}.csv`,[['Fecha','Día','ID','Rubro','Destino','Tarea','Estado'],...rows]);}
-function exportPersonalCSV(){const range=weekRange(S.filters.personalWeek);const rows=S.raw.personal.filter(r=>inDateRange(r.__fecha,range.start,range.end)).map(r=>[fmtDate(r.__fecha),r.__id,r.__agente,r.__dni,r.__sector,r.__motivo,r.__destino,r.__desde,r.__hasta,r.__obs,r.__doc]);downloadCSV(`personal_salidas_${S.filters.personalWeek}.csv`,[['Fecha','ID','Agente','DNI','Sector','Motivo','Destino','Desde','Hasta','Observaciones','DOC'],...rows]);}
-function downloadCSV(name,matrix){const csv='sep=;\r\n'+matrix.map(row=>row.map(v=>csvCell(v)).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);toast('CSV exportado');}
-function csvCell(v){const s=String(v??'');return /[;"\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
-
-function getField(row,names){const keys=Object.keys(row).filter(k=>k!=='__cells');for(const name of names){const n=norm(name);const found=keys.find(k=>norm(k)===n);if(found!==undefined&&String(row[found]??'').trim()!=='')return row[found];}return '';}
-function getCell(row,idx){return Array.isArray(row.__cells)?(row.__cells[idx]??''):'';}
-function norm(v){return String(v||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').toUpperCase();}
-function clean(v){return String(v||'').trim().replace(/\s+/g,' ')||'Sin dato';}
-function parseDateFlex(v){if(!v)return null;const s=String(v).trim();if(!s)return null;if(!isNaN(+s)&&+s>20000&&+s<70000)return new Date(Date.UTC(1899,11,30)+(+s)*86400000);const first=s.split(' ')[0];let m=first.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);if(m){let y=+m[3];if(y<100)y+=2000;return new Date(y,+m[2]-1,+m[1]);}m=first.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/);if(m)return new Date(+m[1],+m[2]-1,+m[3]);const d=new Date(s);return isNaN(d)?null:d;}
-function monthKey(d){return d&&!isNaN(d)?`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`:'Sin fecha';}
-function monthLabel(k){if(!k||k==='Sin fecha')return 'Sin fecha';const [y,m]=k.split('-').map(Number);return `${MONTHS[(m||1)-1]} ${y}`;}
-function isoDate(d){return d&&!isNaN(d)?`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`:'';}
-function fmtDate(d){return d&&!isNaN(d)?d.toLocaleDateString('es-AR'): '—';}
-function fmt(n){return Number(n||0).toLocaleString('es-AR');}
-function fmtDec(n){return Number(n||0).toLocaleString('es-AR',{maximumFractionDigits:1});}
-function esc(s){return String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
-function escAttr(s){return esc(s).replace(/'/g,'&#39;');}
-function setVal(id,val){const el=document.getElementById(id);if(el)el.value=val||'';}
-function dayIndexMon(d){if(!d||isNaN(d))return -1;return (d.getDay()+6)%7;}
-function currentWeekStr(){const d=new Date();d.setHours(0,0,0,0);const th=new Date(d);th.setDate(d.getDate()+3-((d.getDay()+6)%7));const week1=new Date(th.getFullYear(),0,4);const week=1+Math.round(((th-week1)/86400000-3+((week1.getDay()+6)%7))/7);return `${th.getFullYear()}-W${String(week).padStart(2,'0')}`;}
-function setCurrentWeek(){S.filters.week=currentWeekStr();}
-function weekRange(w){const m=String(w||currentWeekStr()).match(/^(\d{4})-W(\d{2})$/);const y=m?+m[1]:new Date().getFullYear(), wk=m?+m[2]:1;const simple=new Date(y,0,1+(wk-1)*7);const dow=simple.getDay();const start=new Date(simple);if(dow<=4)start.setDate(simple.getDate()-simple.getDay()+1);else start.setDate(simple.getDate()+8-simple.getDay());start.setHours(0,0,0,0);const end=new Date(start);end.setDate(start.getDate()+6);end.setHours(23,59,59,999);return {start,end};}
-function inDateRange(d,a,b){return d&&!isNaN(d)&&d>=a&&d<=b;}
-function hoursBetween(a,b){const pa=parseTime(a),pb=parseTime(b);if(pa==null||pb==null)return 0;let diff=pb-pa;if(diff<0)diff+=24*60;return diff/60;}
-function parseTime(t){const m=String(t||'').match(/(\d{1,2}):(\d{2})/);return m?(+m[1]*60+ +m[2]):null;}
-function groupBy(arr,fn){const m=new Map();arr.forEach(x=>{const k=fn(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x);});return m;}
-function drawChart(name,type,canvasId,data,options){if(S.charts[name])S.charts[name].destroy();const ctx=document.getElementById(canvasId);if(!ctx)return;S.charts[name]=new Chart(ctx,{type,data,options});}
-function toggleMenu(){document.body.classList.toggle('menu-open');document.getElementById('overlay').classList.toggle('show',document.body.classList.contains('menu-open'));}
-function closeMenu(){document.body.classList.remove('menu-open');document.getElementById('overlay').classList.remove('show');}
-function setStatus(t){document.getElementById('load-status').textContent=t;}
-function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('es-AR',{dateStyle:'short',timeStyle:'short'});}
-function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600);}
-</script>
+  
+  <div id="toast" class="toast"></div>
+  
+  <script>
+    // ===== STATE & STARTUP =====
+    const S={raw:{pendientes:[],odtObras:[],odtProduccion:[],personal:[]},filters:{dept:'',state:'',week:'',personalWeek:'',produccionWeek:''},active:'inicio',charts:{}};
+    window.addEventListener('load',()=>{setCurrentWeek();renderUI();setInterval(tick,1000)});
+    window.addEventListener('resize',()=>{Object.values(S.charts).forEach(c=>c?.resize?.())});
+    document.getElementById('overlay').addEventListener('click',closeMenu);
+    
+    // ===== NAVIGATION =====
+    function switchSection(id){closeMenu();const sects=document.querySelectorAll('.section');const navs=document.querySelectorAll('.nav-item');sects.forEach(s=>s.classList.remove('active'));navs.forEach(n=>n.classList.remove('active'));document.getElementById(id)?.classList.add('active');[...navs].find(n=>n.textContent.includes(id)?.toLowerCase?.()))?.classList.add('active');S.active=id;if(id==='pendientes')renderPendientes();if(id==='odt-obras')renderOdtObras();if(id==='odt-produccion')renderOdtProduccion();if(id==='personal')renderPersonal()}
+    
+    // ===== DATA LOADING & RENDERING =====
+    function renderUI(){toast('Sistema inicializado');}
+    function renderPendientes(){const rows=buildPendientes();if(rows.length===0){document.getElementById('tablePendientes').style.display='none';document.getElementById('emptyPendientes').style.display='block';return}document.getElementById('tablePendientes').style.display='table';document.getElementById('emptyPendientes').style.display='none';const tbody=document.querySelector('#tablePendientes tbody');tbody.innerHTML=rows.map(r=>`<tr><td>${fmtDate(r.fecha)}</td><td>${r.id}</td><td>${r.dept}</td><td>${r.rubro}</td><td>${r.efector}</td><td>${r.item}</td><td><span class="badge blue">${r.estado}</span></td></tr>`).join('');}
+    function renderOdtObras(){const range=weekRange(S.filters.week);const rows=S.raw.odtObras.filter(r=>inDateRange(r.__fecha,range.start,range.end)).map(r=>({__fecha:r.__fecha,dia:DAYS[dayIndexMon(r.__fecha)]||'',id:r.__id,rubro:r.__rubro,destino:r.__efector,tarea:r.__item,estado:r.__estado}));if(rows.length===0){document.getElementById('tableOdtObras').style.display='none';document.getElementById('emptyOdtObras').style.display='block';return}document.getElementById('tableOdtObras').style.display='table';document.getElementById('emptyOdtObras').style.display='none';const tbody=document.querySelector('#tableOdtObras tbody');tbody.innerHTML=rows.map(r=>`<tr><td>${fmtDate(r.__fecha)}</td><td>${r.dia}</td><td>${r.id}</td><td>${r.rubro}</td><td>${r.destino}</td><td>${r.tarea}</td><td><span class="badge green">${r.estado}</span></td></tr>`).join('');drawOdtChart('odtObras');}
+    function renderOdtProduccion(){const range=weekRange(S.filters.week);const rows=S.raw.odtProduccion.filter(r=>inDateRange(r.__fecha,range.start,range.end)).map(r=>({__fecha:r.__fecha,dia:DAYS[dayIndexMon(r.__fecha)]||'',id:r.__id,rubro:r.__rubro,destino:r.__efector,tarea:r.__item,estado:r.__estado}));if(rows.length===0){document.getElementById('tableOdtProduccion').style.display='none';document.getElementById('emptyOdtProduccion').style.display='block';return}document.getElementById('tableOdtProduccion').style.display='table';document.getElementById('emptyOdtProduccion').style.display='none';const tbody=document.querySelector('#tableOdtProduccion tbody');tbody.innerHTML=rows.map(r=>`<tr><td>${fmtDate(r.__fecha)}</td><td>${r.dia}</td><td>${r.id}</td><td>${r.rubro}</td><td>${r.destino}</td><td>${r.tarea}</td><td><span class="badge green">${r.estado}</span></td></tr>`).join('');drawOdtChart('odtProduccion');}
+    function renderPersonal(){const range=weekRange(S.filters.personalWeek);const rows=S.raw.personal.filter(r=>inDateRange(r.__fecha,range.start,range.end)).map(r=>({fecha:r.__fecha,id:r.__id,agente:r.__agente,dni:r.__dni,sector:r.__sector,motivo:r.__motivo,destino:r.__destino,desde:r.__desde,hasta:r.__hasta,obs:r.__obs}));if(rows.length===0){document.getElementById('tablePersonal').style.display='none';document.getElementById('emptyPersonal').style.display='block';return}document.getElementById('tablePersonal').style.display='table';document.getElementById('emptyPersonal').style.display='none';const tbody=document.querySelector('#tablePersonal tbody');tbody.innerHTML=rows.map(r=>`<tr><td>${fmtDate(r.fecha)}</td><td>${r.id}</td><td>${r.agente}</td><td>${r.dni}</td><td>${r.sector}</td><td>${r.motivo}</td><td>${r.destino}</td><td>${r.desde}</td><td>${r.hasta}</td><td>${r.obs}</td></tr>`).join('');}
+    
+    function buildPendientes(){return S.raw.pendientes.filter(r=>(S.filters.dept===''||r.dept===S.filters.dept)&&(S.filters.state===''||r.estado===S.filters.state)).map(r=>({...r,fecha:parseDateFlex(r.__fecha)||new Date()}));}
+    function applyFilters(){if(S.active==='pendientes')renderPendientes();if(S.active==='odt-obras'||S.active==='odt-produccion')renderOdtObras();if(S.active==='personal')renderPersonal();}
+    
+    function drawOdtChart(key){const range=weekRange(key==='odtObras'?S.filters.week:S.filters.produccionWeek);const data=S.raw[key==='odtObras'?'odtObras':'odtProduccion'].filter(r=>inDateRange(r.__fecha,range.start,range.end));const grouped=new Map();data.forEach(r=>{const k=r.__estado||'Sin estado';grouped.set(k,(grouped.get(k)||0)+1)});const labels=Array.from(grouped.keys());const values=Array.from(grouped.values());const canvasId=key==='odtObras'?'chartOdtObrasPie':'chartOdtProduccionPie';drawChart(`${key}_pie`,  'doughnut',canvasId,{labels,datasets:[{label:'Cantidad',data:values,backgroundColor:['#2563EB','#10B981','#F59E0B','#F05252']}]},{responsive:true,maintainAspectRatio:false});}
+    
+    // ===== EXPORT =====
+    function exportPendientesCSV(){const rows=buildPendientes().map(r=>[r.month,monthLabel(r.month),r.dept,r.id,fmtDate(r.fecha),r.estado,r.rubro,r.efector,r.item]);downloadCSV('pendientes_do_dp.csv',[['Mes','Mes texto','Departamento','ID','Fecha','Estado','Rubro','Efector','Detalle'],...rows]);}
+    function exportOdtCSV(kind){const key=kind==='obras'?'odtObras':'odtProduccion';const range=weekRange(S.filters.week);const rows=S.raw[key].filter(r=>inDateRange(r.__fecha,range.start,range.end)).map(r=>[fmtDate(r.__fecha),DAYS[dayIndexMon(r.__fecha)]||'',r.__id,r.__rubro,r.__efector,r.__item,r.__estado]);downloadCSV(`odt_${kind}_${S.filters.week}.csv`,[['Fecha','Día','ID','Rubro','Destino','Tarea','Estado'],...rows]);}
+    function exportPersonalCSV(){const range=weekRange(S.filters.personalWeek);const rows=S.raw.personal.filter(r=>inDateRange(r.__fecha,range.start,range.end)).map(r=>[fmtDate(r.__fecha),r.__id,r.__agente,r.__dni,r.__sector,r.__motivo,r.__destino,r.__desde,r.__hasta,r.__obs,r.__doc]);downloadCSV(`personal_salidas_${S.filters.personalWeek}.csv`,[['Fecha','ID','Agente','DNI','Sector','Motivo','Destino','Desde','Hasta','Observaciones','DOC'],...rows]);}
+    function downloadCSV(name,matrix){const csv='sep=;\r\n'+matrix.map(row=>row.map(v=>csvCell(v)).join(';')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);toast('CSV exportado');}
+    function csvCell(v){const s=String(v??'');return /[;"\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+    
+    // ===== UTILITIES =====
+    const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const DAYS=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+    
+    function norm(v){return String(v||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').toUpperCase();}
+    function clean(v){return String(v||'').trim().replace(/\s+/g,' ')||'Sin dato';}
+    function parseDateFlex(v){if(!v)return null;const s=String(v).trim();if(!s)return null;if(!isNaN(+s)&&+s>20000&&+s<70000)return new Date(Date.UTC(1899,11,30)+(+s)*86400000);const first=s.split(' ')[0];let m=first.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);if(m){let y=+m[3];if(y<100)y+=2000;return new Date(y,+m[2]-1,+m[1]);}m=first.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/);if(m)return new Date(+m[1],+m[2]-1,+m[3]);const d=new Date(s);return isNaN(d)?null:d;}
+    function monthKey(d){return d&&!isNaN(d)?`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`:'Sin fecha';}
+    function monthLabel(k){if(!k||k==='Sin fecha')return 'Sin fecha';const [y,m]=k.split('-').map(Number);return `${MONTHS[(m||1)-1]} ${y}`;}
+    function isoDate(d){return d&&!isNaN(d)?`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`:'';  }
+    function fmtDate(d){return d&&!isNaN(d)?d.toLocaleDateString('es-AR'): '—';}
+    function fmt(n){return Number(n||0).toLocaleString('es-AR');}
+    function fmtDec(n){return Number(n||0).toLocaleString('es-AR',{maximumFractionDigits:1});}
+    function esc(s){return String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+    function escAttr(s){return esc(s).replace(/'/g,'&#39;');}
+    function dayIndexMon(d){if(!d||isNaN(d))return -1;return (d.getDay()+6)%7;}
+    function currentWeekStr(){const d=new Date();d.setHours(0,0,0,0);const th=new Date(d);th.setDate(d.getDate()+3-((d.getDay()+6)%7));const week1=new Date(th.getFullYear(),0,4);const week=1+Math.round(((th-week1)/86400000-3+((week1.getDay()+6)%7))/7);return `${th.getFullYear()}-W${String(week).padStart(2,'0')}`;}
+    function setCurrentWeek(){S.filters.week=currentWeekStr();S.filters.personalWeek=currentWeekStr();S.filters.produccionWeek=currentWeekStr();}
+    function weekRange(w){const m=String(w||currentWeekStr()).match(/^(\d{4})-W(\d{2})$/);const y=m?+m[1]:new Date().getFullYear(), wk=m?+m[2]:1;const simple=new Date(y,0,1+(wk-1)*7);const dow=simple.getDay();const start=new Date(simple);if(dow<=4)start.setDate(simple.getDate()-simple.getDay()+1);else start.setDate(simple.getDate()+8-simple.getDay());start.setHours(0,0,0,0);const end=new Date(start);end.setDate(start.getDate()+6);end.setHours(23,59,59,999);return {start,end};}
+    function inDateRange(d,a,b){return d&&!isNaN(d)&&d>=a&&d<=b;}
+    function hoursBetween(a,b){const pa=parseTime(a),pb=parseTime(b);if(pa==null||pb==null)return 0;let diff=pb-pa;if(diff<0)diff+=24*60;return diff/60;}
+    function parseTime(t){const m=String(t||'').match(/(\d{1,2}):(\d{2})/);return m?(+m[1]*60+ +m[2]):null;}
+    function groupBy(arr,fn){const m=new Map();arr.forEach(x=>{const k=fn(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x);});return m;}
+    function drawChart(name,type,canvasId,data,options){if(S.charts[name])S.charts[name].destroy();const ctx=document.getElementById(canvasId);if(!ctx)return;S.charts[name]=new Chart(ctx,{type,data,options});}
+    function toggleMenu(){document.body.classList.toggle('menu-open');document.getElementById('overlay').classList.toggle('show',document.body.classList.contains('menu-open'));}
+    function closeMenu(){document.body.classList.remove('menu-open');document.getElementById('overlay').classList.remove('show');}
+    function setStatus(t){document.getElementById('load-status').textContent=t;}
+    function tick(){document.getElementById('clock').textContent=new Date().toLocaleString('es-AR',{dateStyle:'short',timeStyle:'short'});if(document.getElementById('clock-hero'))document.getElementById('clock-hero').textContent=new Date().toLocaleTimeString('es-AR');}
+    function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600);}
+  </script>
 </body>
 </html>
