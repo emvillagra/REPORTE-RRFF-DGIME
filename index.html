@@ -512,7 +512,7 @@
     document.getElementById('overlay').addEventListener('click',closeMenu);
     
     // ===== NAVIGATION =====
-    function switchSection(id){closeMenu();const sects=document.querySelectorAll('.section');const navs=document.querySelectorAll('.nav-item');sects.forEach(s=>s.classList.remove('active'));navs.forEach(n=>n.classList.remove('active'));document.getElementById(id)?.classList.add('active');[...navs].find(n=>n.textContent.includes(id)?.toLowerCase?.()))?.classList.add('active');S.active=id;if(id==='pendientes')renderPendientes();if(id==='odt-obras')renderOdtObras();if(id==='odt-produccion')renderOdtProduccion();if(id==='personal')renderPersonal()}
+    function switchSection(id){closeMenu();const sects=document.querySelectorAll('.section');const navs=document.querySelectorAll('.nav-item');sects.forEach(s=>s.classList.remove('active'));navs.forEach(n=>n.classList.remove('active'));const sec=document.getElementById(id);if(sec)sec.classList.add('active');const navMatch=[...navs].find(n=>n.textContent.toLowerCase().includes(id.toLowerCase()));if(navMatch)navMatch.classList.add('active');S.active=id;if(id==='pendientes')renderPendientes();if(id==='odt-obras')renderOdtObras();if(id==='odt-produccion')renderOdtProduccion();if(id==='personal')renderPersonal()}
     
     // ===== DATA LOADING & RENDERING =====
     function renderUI(){toast('Sistema inicializado');}
